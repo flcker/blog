@@ -1,0 +1,807 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/blog/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="media,video," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/blog/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="学习新一代视频压缩编码标准——H.264/AVC （毕厚杰版）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="视频编解码-学习一">
+<meta property="og:url" content="http://flcker.cn/2016/02/17/视频编解码-学习一/index.html">
+<meta property="og:site_name" content="青芒与鱼">
+<meta property="og:description" content="学习新一代视频压缩编码标准——H.264/AVC （毕厚杰版）">
+<meta property="og:image" content="http://flcker.cn/./image/yuv_sample.jpg">
+<meta property="og:image" content="http://flcker.cn/./image/yuv420-MPEG-1.gif">
+<meta property="og:image" content="http://flcker.cn/./image/yuv420-MPEG-2.gif">
+<meta property="og:image" content="http://flcker.cn/./image/uyvy.gif">
+<meta property="og:image" content="http://flcker.cn/./image/yvyu.gif">
+<meta property="og:image" content="http://flcker.cn/./image/yuy2.gif">
+<meta property="og:image" content="http://flcker.cn/./image/yv12.png">
+<meta property="og:image" content="http://flcker.cn/./image/nv12.png">
+<meta property="og:image" content="http://flcker.cn/./image/i420.png">
+<meta property="og:updated_time" content="2016-02-19T04:14:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="视频编解码-学习一">
+<meta name="twitter:description" content="学习新一代视频压缩编码标准——H.264/AVC （毕厚杰版）">
+<meta name="twitter:image" content="http://flcker.cn/./image/yuv_sample.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://flcker.cn/2016/02/17/视频编解码-学习一/"/>
+
+
+  <title> 视频编解码-学习一 | 青芒与鱼 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/blog/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">青芒与鱼</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">生活比一切都重要</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                视频编解码-学习一
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-17T10:55:28+08:00" content="2016-02-17">
+              2016-02-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/blog/categories/media/" itemprop="url" rel="index">
+                    <span itemprop="name">media</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>学习新一代视频压缩编码标准——H.264/AVC （毕厚杰版）</p>
+<a id="more"></a>
+<hr>
+<h2 id="彩色空间"><a href="#彩色空间" class="headerlink" title="彩色空间"></a>彩色空间</h2><p>黑白图像的每个像素只需一个幅值表示<code>亮度</code>即可，而彩色图像的每个像素至少需要3个值表示<code>亮度</code>和<code>色度</code>。所谓色度空间就是彩色图像的亮度与色度的方法。</p>
+<h3 id="RGB"><a href="#RGB" class="headerlink" title="RGB"></a>RGB</h3><p>任何彩色图像可以有不同比例的红色(R)、绿色(G)和蓝色(B)组合而成，就是三基色原理，由R、G、B组成的彩色空间就是RGB空间。</p>
+<p>彩色显像管（CRT）和液晶显示器（LCD）可显示彩色图像，彩色摄像机中的电荷耦合器件（CCD）等传感器可产生彩色电视图像，都是根据RGB原理获得的。</p>
+<h3 id="YCbCr-YUV"><a href="#YCbCr-YUV" class="headerlink" title="YCbCr(YUV)"></a>YCbCr(YUV)</h3><p>人类视觉系统（HVS）对亮度比彩色敏感，因此把亮度信息从彩色信息中分离出来，使亮度具有更高的清晰度。彩色信息的清晰度降低，可以压缩带宽，实现视频压缩的一部分。</p>
+<ul>
+<li>表面原点：对于本文讲述的 YUV 格式，原点 (0,0) 总是位于表面的左上角。</li>
+<li>跨距：表面的跨距，有时也称为间距，指的是表面的宽度，以字节数表示。对于一个表面原点位于左上角的表面来说，跨距总是正数。</li>
+<li>对齐：表面的对齐是根据图形显示驱动程序的不同而定的。表面始终应该 DWORD 对齐，就是说，表面中的各个行肯定都是从 32 位 (DWORD) 边界开始的。对齐可以大于 32 位，但具体取决于硬件的需求。</li>
+<li>打包格式（<code>packed</code>）与平面格式（<code>planar</code>）：YUV格式可以分为打包格式和平面格式。在打包格式中，Y、U 和 V 组件存储在一个数组中。像素被组织到了一些巨像素组中，巨像素组的布局取决于格式。在平面格式中，Y、U 和 V 组件作为三个单独的平面进行存储。</li>
+</ul>
+<p>YUV格式有两大类：<code>planar</code>和<code>packed</code>。</p>
+<ul>
+<li>对于<code>planar</code>的YUV格式，先连续存储所有像素点的Y，紧接着存储所有像素点的U，随后是所有像素点的V。</li>
+<li>对于<code>packed</code>的YUV格式，每个像素点的Y,U,V是连续交叉存储的。</li>
+</ul>
+<p>YUV，分为三个分量，“Y”表示<code>明亮度</code>（Luminance或Luma），也就是<code>灰度值</code>；而“U”和“V” 表示的则是<code>色度</code>（Chrominance或Chroma），作用是描述影像色彩及饱和度，用于指定像素的颜色。</p>
+<p>YCbCr与RGB的的换算的标准公式：</p>
+<ul>
+<li><code>Y = (0.257 * R) + (0.504 * G) + (0.098 * B) + 16</code></li>
+<li><code>Cr = V = (0.439 * R) - (0.368 * G) - (0.071 * B) + 128</code></li>
+<li><code>Cb = U = -( 0.148 * R) - (0.291 * G) + (0.439 * B) + 128</code></li>
+</ul>
+<ul>
+<li><code>B = 1.164(Y - 16) + 2.018(U - 128)</code></li>
+<li><code>G = 1.164(Y - 16) - 0.813(V - 128) - 0.391(U - 128)</code></li>
+<li><code>R = 1.164(Y - 16) + 1.596(V - 128)</code></li>
+</ul>
+<p>YCbCr与RGB的的换算的简化公式：</p>
+<ul>
+<li><code>Y = 0.299R + 0.587G + 0.114B</code></li>
+<li><code>Cb = 0.564(B - Y)</code></li>
+<li><code>Cr = 0.713(R - Y)</code></li>
+</ul>
+<ul>
+<li><code>R = Y + 1.402Cr</code></li>
+<li><code>G = Y - 0.344Cb - 0.714Cr</code></li>
+<li><code>B = Y + 1.772Cb</code></li>
+</ul>
+<hr>
+<h2 id="彩色电视取样格式"><a href="#彩色电视取样格式" class="headerlink" title="彩色电视取样格式"></a>彩色电视取样格式</h2><p>用三个图来直观地表示采集的方式吧，以黑点表示采样该像素点的<code>Y分量</code>，以空心圆圈表示采用该像素点的<code>UV分量</code>。</p>
+<p><img src="./image/yuv_sample.jpg" alt="yuv sample"></p>
+<p>先记住下面这段话，以后提取每个像素的YUV分量会用到。</p>
+<pre><code>YUV 4:4:4采样，每一个Y对应一组UV分量。
+YUV 4:2:2采样，每两个Y共用一组UV分量。
+YUV 4:2:0采样，每四个Y共用一组UV分量。
+</code></pre><p>其实yuv420采样方式有两种常见的变化形式（亮度用叉来表示，色度样例则用圈表示）：</p>
+<p>另一种形式用于 MPEG-1 以及 ITU-T recommendations H.261 和 H.263</p>
+<p><img src="./image/yuv420-MPEG-1.gif" alt="yuv420 mepg-1 sample"></p>
+<p>MPEG-2 视频</p>
+<p><img src="./image/yuv420-MPEG-2.gif" alt="yuv420 mepg-2 sample"></p>
+<hr>
+<h2 id="YUV存储格式"><a href="#YUV存储格式" class="headerlink" title="YUV存储格式"></a>YUV存储格式</h2><p>参考： <a href="http://www.fourcc.org/yuv.php" target="_blank" rel="external">http://www.fourcc.org/yuv.php</a></p>
+<p>yuv分为packed formats和planar formats。</p>
+<p>MEDIASUBTYPE_YUY2   YUY2格式，以4:2:2方式打包<br>MEDIASUBTYPE_YUYV   YUYV格式（实际格式与YUY2相同）<br>MEDIASUBTYPE_YVYU   YVYU格式，以4:2:2方式打包<br>MEDIASUBTYPE_UYVY   UYVY格式，以4:2:2方式打包<br>MEDIASUBTYPE_AYUV   带Alpha通道的4:4:4 YUV格式<br>MEDIASUBTYPE_Y41P   Y41P格式，以4:1:1方式打包<br>MEDIASUBTYPE_Y411   Y411格式（实际格式与Y41P相同）<br>MEDIASUBTYPE_Y211   Y211格式<br>MEDIASUBTYPE_IF09   IF09格式<br>MEDIASUBTYPE_IYUV   IYUV格式<br>MEDIASUBTYPE_YV12   YV12格式<br>MEDIASUBTYPE_YVU9   YVU9格式</p>
+<h3 id="Packed-YUV-Formats"><a href="#Packed-YUV-Formats" class="headerlink" title="Packed YUV Formats"></a>Packed YUV Formats</h3><h4 id="AYUV"><a href="#AYUV" class="headerlink" title="AYUV"></a>AYUV</h4><p>4:4:4 YUV format with 8 bit samples for each component along with an 8 bit alpha blend value per pixel. Component ordering is A Y U V (as the name suggests).</p>
+<p>A就是alpha通道。</p>
+<h4 id="YUV422"><a href="#YUV422" class="headerlink" title="YUV422"></a>YUV422</h4><h5 id="UYVY"><a href="#UYVY" class="headerlink" title="UYVY"></a>UYVY</h5><p><code>UYVY</code> is probably the most popular of the various YUV 4:2:2 formats. It is output as the format of choice by the Radius Cinepak codec and is often the second choice of software MPEG codecs after YV12.（Cinepak同样是由苹果公司的软件QuickTime使用的一种很老的编解码器，好处是即使很老的计算机(如486)也都支援并且能顺利播放。）</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Horizontal</th>
+<th style="text-align:center">Vertical</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Y Sample Period</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">V Sample Period</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">U Sample Period</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">内存地址</th>
+<th style="text-align:center">内存内容（单位byte）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">start + 0</td>
+<td style="text-align:center">U Y V Y U Y V Y</td>
+</tr>
+<tr>
+<td style="text-align:center">start + 8</td>
+<td style="text-align:center">U Y V Y U Y V Y</td>
+</tr>
+<tr>
+<td style="text-align:center">start + 16</td>
+<td style="text-align:center">U Y V Y U Y V Y</td>
+</tr>
+<tr>
+<td style="text-align:center">start + 24</td>
+<td style="text-align:center">U Y V Y U Y V Y</td>
+</tr>
+</tbody>
+</table>
+<p><img src="./image/uyvy.gif" alt="UYVY"></p>
+<h5 id="YVYU"><a href="#YVYU" class="headerlink" title="YVYU"></a>YVYU</h5><p>采样方式：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Horizontal</th>
+<th style="text-align:center">Vertical</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Y Sample Period</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">V Sample Period</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">U Sample Period</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">内存地址</th>
+<th style="text-align:center">内存内容（单位byte）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">start + 0</td>
+<td style="text-align:center">Y V Y U Y V Y U</td>
+</tr>
+<tr>
+<td style="text-align:center">start + 8</td>
+<td style="text-align:center">Y V Y U Y V Y U</td>
+</tr>
+<tr>
+<td style="text-align:center">start + 16</td>
+<td style="text-align:center">Y V Y U Y V Y U</td>
+</tr>
+<tr>
+<td style="text-align:center">start + 24</td>
+<td style="text-align:center">Y V Y U Y V Y U</td>
+</tr>
+</tbody>
+</table>
+<p><img src="./image/yvyu.gif" alt="YUYV"></p>
+<h5 id="YUY2"><a href="#YUY2" class="headerlink" title="YUY2"></a>YUY2</h5><table>
+<thead>
+<tr>
+<th style="text-align:center">内存地址</th>
+<th style="text-align:center">内存内容（单位byte）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">start + 0</td>
+<td style="text-align:center">Y U Y V Y U Y V</td>
+</tr>
+<tr>
+<td style="text-align:center">start + 8</td>
+<td style="text-align:center">Y U Y V Y U Y V</td>
+</tr>
+<tr>
+<td style="text-align:center">start + 16</td>
+<td style="text-align:center">Y U Y V Y U Y V</td>
+</tr>
+<tr>
+<td style="text-align:center">start + 24</td>
+<td style="text-align:center">Y U Y V Y U Y V</td>
+</tr>
+</tbody>
+</table>
+<p><img src="./image/yuy2.gif" alt="YUY2"></p>
+<h3 id="Planar-YUV-Formats"><a href="#Planar-YUV-Formats" class="headerlink" title="Planar YUV Formats"></a>Planar YUV Formats</h3><h4 id="YV12"><a href="#YV12" class="headerlink" title="YV12"></a>YV12</h4><p>是YUV420中的一种常见格式。It comprises an NxM Y plane(平面) followed by (N/2)x(M/2) V and U planes.</p>
+<p><img src="./image/yv12.png" alt="yv12"></p>
+<h4 id="NV12"><a href="#NV12" class="headerlink" title="NV12"></a>NV12</h4><p>是YUV420中的一种常见格式。<br>YUV 4:2:0 image with a plane of 8 bit Y samples followed by an interleaved(交叉存取) U/V plane containing 8 bit 2x2 subsampled colour difference samples.</p>
+<p><img src="./image/nv12.png" alt="nv12"></p>
+<h4 id="I420"><a href="#I420" class="headerlink" title="I420"></a>I420</h4><p>I420跟YV12只有V和U的顺序相反，其他都是一样的。<br>They comprise an NxN Y plane followed by (N/2)x(N/2) U and V planes.</p>
+<pre><code>YV12 ： 亮度（行×列） ＋ V（行×列/4) + U（行×列/4）
+I420 ： 亮度（行×列） ＋ U（行×列/4) + V（行×列/4）
+</code></pre><p>yuv420p就是I420格式，使用极其广泛，它的示意图：</p>
+<p><img src="./image/i420.png" alt="yuv420p"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/media/" rel="tag">#media</a>
+          
+            <a href="/blog/tags/video/" rel="tag">#video</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2016/01/29/stl中list用法/" rel="next" title="stl中list用法">
+                <i class="fa fa-chevron-left"></i> stl中list用法
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2016/02/19/mpeg2-ts协议/" rel="prev" title="mpeg2-ts协议">
+                mpeg2-ts协议 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/blog/images/avatar.gif"
+               alt="flcker" />
+          <p class="site-author-name" itemprop="name">flcker</p>
+          <p class="site-description motion-element" itemprop="description">长沟流月去无声。杏花疏影里，吹笛到天明。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/blog/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/blog/tags">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#彩色空间"><span class="nav-number">1.</span> <span class="nav-text">彩色空间</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RGB"><span class="nav-number">1.1.</span> <span class="nav-text">RGB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YCbCr-YUV"><span class="nav-number">1.2.</span> <span class="nav-text">YCbCr(YUV)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#彩色电视取样格式"><span class="nav-number">2.</span> <span class="nav-text">彩色电视取样格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#YUV存储格式"><span class="nav-number">3.</span> <span class="nav-text">YUV存储格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Packed-YUV-Formats"><span class="nav-number">3.1.</span> <span class="nav-text">Packed YUV Formats</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AYUV"><span class="nav-number">3.1.1.</span> <span class="nav-text">AYUV</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#YUV422"><span class="nav-number">3.1.2.</span> <span class="nav-text">YUV422</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#UYVY"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">UYVY</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#YVYU"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">YVYU</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#YUY2"><span class="nav-number">3.1.2.3.</span> <span class="nav-text">YUY2</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Planar-YUV-Formats"><span class="nav-number">3.2.</span> <span class="nav-text">Planar YUV Formats</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#YV12"><span class="nav-number">3.2.1.</span> <span class="nav-text">YV12</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NV12"><span class="nav-number">3.2.2.</span> <span class="nav-text">NV12</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#I420"><span class="nav-number">3.2.3.</span> <span class="nav-text">I420</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">flcker</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/blog/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/blog/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/blog/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/blog/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/blog/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/blog/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/blog/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

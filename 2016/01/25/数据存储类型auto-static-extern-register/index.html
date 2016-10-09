@@ -1,0 +1,633 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/blog/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C/C++," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/blog/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="C(C++)语言中的每个变量有两个属性：数据类型（整形、浮点型、字符型），还有数据存储类别，分别为自动的(auto)，静态的(static)，寄存器的(register)和外部的(extern)。
+extern外部变量声明，是指这是一个已在别的地方定义过的对象，这里只是对变量的一次重复引用，不会产生新的变量。
+static静态数据，数据存放在全局数据区，但作用域只是本 文件/函数 中，所以你可以在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据存储类型auto,static,extern,register">
+<meta property="og:url" content="http://flcker.cn/2016/01/25/数据存储类型auto-static-extern-register/index.html">
+<meta property="og:site_name" content="青芒与鱼">
+<meta property="og:description" content="C(C++)语言中的每个变量有两个属性：数据类型（整形、浮点型、字符型），还有数据存储类别，分别为自动的(auto)，静态的(static)，寄存器的(register)和外部的(extern)。
+extern外部变量声明，是指这是一个已在别的地方定义过的对象，这里只是对变量的一次重复引用，不会产生新的变量。
+static静态数据，数据存放在全局数据区，但作用域只是本 文件/函数 中，所以你可以在">
+<meta property="og:updated_time" content="2016-01-26T07:34:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据存储类型auto,static,extern,register">
+<meta name="twitter:description" content="C(C++)语言中的每个变量有两个属性：数据类型（整形、浮点型、字符型），还有数据存储类别，分别为自动的(auto)，静态的(static)，寄存器的(register)和外部的(extern)。
+extern外部变量声明，是指这是一个已在别的地方定义过的对象，这里只是对变量的一次重复引用，不会产生新的变量。
+static静态数据，数据存放在全局数据区，但作用域只是本 文件/函数 中，所以你可以在">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://flcker.cn/2016/01/25/数据存储类型auto-static-extern-register/"/>
+
+
+  <title> 数据存储类型auto,static,extern,register | 青芒与鱼 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/blog/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">青芒与鱼</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">生活比一切都重要</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                数据存储类型auto,static,extern,register
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-01-25T11:28:28+08:00" content="2016-01-25">
+              2016-01-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/blog/categories/C-C/" itemprop="url" rel="index">
+                    <span itemprop="name">C/C++</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>C(C++)语言中的每个变量有两个属性：<code>数据类型</code>（整形、浮点型、字符型），还有<code>数据存储类别</code>，分别为自动的(auto)，静态的(static)，寄存器的(register)和外部的(extern)。</p>
+<h2 id="extern"><a href="#extern" class="headerlink" title="extern"></a>extern</h2><p>外部变量声明，是指这是一个已在别的地方定义过的对象，这里只是对变量的一次重复引用，不会产生新的变量。</p>
+<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><p>静态数据，数据存放在全局数据区，但<strong>作用域只是本 文件/函数 中，所以你可以在两个不同的文件/函数内部申明同名的static变量，但是           它们是两个不同的全局变量。</strong> 如果是定义在函数内，那么该对象具有无链接，函数外不能对其访问。如果是定义在函数外，那么该对象具          有内部链接，其它程序文件不能对其访问</p>
+<h3 id="常见的两种用途"><a href="#常见的两种用途" class="headerlink" title="常见的两种用途"></a>常见的两种用途</h3><ol>
+<li>统计函数被调用的次数;</li>
+<li>减少局部数组建立和赋值的开销.变量的建立和赋值是需要一定的处理器开销的，特别是数组等含有较多元素的存储类型。在一些含有较多的变量并且被经常调用的函数中，可以将一些数组声明为static类型，以减少建立或者初始化这些变量的开销.</li>
+</ol>
+<h3 id="详细说明"><a href="#详细说明" class="headerlink" title="详细说明"></a>详细说明</h3><ol>
+<li>变量会被放在程序的全局存储区中，这样可以在下一次调用的时候还可以保持原来的赋值。这一点是它与堆栈变量和堆变量的区别。</li>
+<li>变量用static告知编译器，自己仅仅在变量的作用范围内可见。这一点是它与全局变量的区别。</li>
+<li>当static用来修饰全局变量时，它就改变了全局变量的作用域，使其不能被别的程序extern，限制在了当前文件里，但是没有改变其存放位置，还是在全局静态储存区。</li>
+</ol>
+<p>###　使用注意</p>
+<ol>
+<li>若全局变量仅在单个C文件中访问，则可以将这个变量修改为静态全局变量，以降低模块间的耦合度；</li>
+<li>若全局变量仅由单个函数访问，则可以将这个变量改为该函数的静态局部变量，以降低模块间的耦合度；</li>
+<li>设计和使用访问动态全局变量、静态全局变量、静态局部变量的函数时，需要考虑重入问题(只要输入数据相同就应产生相同的输出)。</li>
+</ol>
+<h2 id="auto"><a href="#auto" class="headerlink" title="auto"></a>auto</h2><p>普通局部栈变量，是自动存储，这种对象会自动创建和销毁 ，建议这个变量要放在堆栈上面，调用函数时分配内存，函数结束时释放内            存。<u>一般隐藏auto默认为自动存储类别。我们程序都变量大多是自动变量。</u></p>
+<h2 id="register"><a href="#register" class="headerlink" title="register"></a>register</h2><p>寄存器变量，请求编译器将这个变量保存在CPU的寄存器中，从而加快程序的运行。系统的寄存器是有限制的,声明变量时如:register int i.这种存储类型可以用于频繁使用的变量。</p>
+<h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><p>被const修饰的东西都受到强制保护，可以预防意外的变动，能提高程序的健壮性。它可以修饰函数的参数、返回值，甚至函数的定义体。</p>
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用:"></a>作用:</h2><h3 id="修饰输入参数"><a href="#修饰输入参数" class="headerlink" title="修饰输入参数"></a>修饰输入参数</h3><ol>
+<li>对于非内部数据类型的输入参数，应该将“值传递”的方式改为“const引用传递”，目的是提高效率。例如将void Func(A a) 改为void Func(const A &amp;a)。</li>
+<li>对于内部数据类型的输入参数，不要将“值传递”的方式改为“const引用传递”。否则既达不到提高效率的目的，又降低了函数的可理解性。例如void Func(int x) 不应该改为void Func(const int &amp;x)。</li>
+</ol>
+<h3 id="用const修饰函数的返回值"><a href="#用const修饰函数的返回值" class="headerlink" title="用const修饰函数的返回值"></a>用const修饰函数的返回值</h3><ol>
+<li><p>如果给以“指针传递”方式的函数返回值加const修饰，那么函数返回值（即指针）的内容不能被修改，该返回值只能被赋给加const修饰的同类型指针。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">　　　　　　　如对于： const char * GetString(void);</div><div class="line">　　　　　　　如下语句将出现编译错误：</div><div class="line">　　　　　　 　char *str = GetString();//cannot convert from &apos;const char *&apos; to &apos;char *&apos;；</div><div class="line">　　　　　　　正确的用法是：</div><div class="line">　　　　　　　const char *str = GetString();</div></pre></td></tr></table></figure>
+</li>
+<li><p>如果函数返回值采用“值传递方式”，由于函数会把返回值复制到外部临时的存储单元中，加const修饰没有任何价值。 如不要把函数int GetInt(void) 写成const int GetInt(void)。</p>
+</li>
+<li><p>const成员函数的声明中，const关键字只能放在函数声明的尾部,表示该类成员不修改对象.</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">说明：</div><div class="line">　　　　const type m; //修饰m为不可改变</div><div class="line">　　　示例：</div><div class="line">　　　　typedef char * pStr; //新的类型pStr;</div><div class="line">　　　　char string[4] = &quot;abc&quot;;</div><div class="line">　　　　const char *p1 = string；</div><div class="line">　　　　p1++; //正确，上边修饰的是*p1,p1可变</div><div class="line">　　　　const pStr p2 = string;</div><div class="line">　　　　p2++; //错误，上边修饰的是p2，p2不可变,*p2可变</div><div class="line">　　　同理，const修饰指针时用此原则判断就不会混淆了。</div><div class="line">　　　　const int *value; //*value不可变，value可变</div><div class="line">　　　　int* const value; //value不可变，*value可变</div><div class="line">　　　　const (int *) value; //(int *)是一种type,value不可变,*value可变</div><div class="line">　　　　　　　　　　　　　　//逻辑上这样理解，编译不能通过，需要tydef int* NewType;</div><div class="line">　　　　const int* const value;//*value,value都不可变</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/C-C/" rel="tag">#C/C++</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2016/01/21/mingw和vim的搭建/" rel="next" title="post">
+                <i class="fa fa-chevron-left"></i> post
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2016/01/25/markdown使用技巧辑录/" rel="prev" title="markdown使用技巧辑录">
+                markdown使用技巧辑录 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/blog/images/avatar.gif"
+               alt="flcker" />
+          <p class="site-author-name" itemprop="name">flcker</p>
+          <p class="site-description motion-element" itemprop="description">长沟流月去无声。杏花疏影里，吹笛到天明。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/blog/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/blog/tags">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#extern"><span class="nav-number">1.</span> <span class="nav-text">extern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static"><span class="nav-number">2.</span> <span class="nav-text">static</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的两种用途"><span class="nav-number">2.1.</span> <span class="nav-text">常见的两种用途</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#详细说明"><span class="nav-number">2.2.</span> <span class="nav-text">详细说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#auto"><span class="nav-number">3.</span> <span class="nav-text">auto</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#register"><span class="nav-number">4.</span> <span class="nav-text">register</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#const"><span class="nav-number">5.</span> <span class="nav-text">const</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作用"><span class="nav-number">6.</span> <span class="nav-text">作用:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修饰输入参数"><span class="nav-number">6.1.</span> <span class="nav-text">修饰输入参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用const修饰函数的返回值"><span class="nav-number">6.2.</span> <span class="nav-text">用const修饰函数的返回值</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">flcker</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/blog/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/blog/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/blog/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/blog/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/blog/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/blog/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/blog/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
