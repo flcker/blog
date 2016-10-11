@@ -4,6 +4,14 @@
   
     
     <entry>
+      <title><![CDATA[旅行记]]></title>
+      <url>http://flcker.cn/blog/2016/10/11/%E6%97%85%E8%A1%8C%E8%AE%B0/</url>
+      <content type="html"><![CDATA[<h2 id="陈坤"><a href="#陈坤" class="headerlink" title="陈坤"></a>陈坤</h2><p><img src="http://img.mp.itc.cn/upload/20160919/07058021920149ecaf0502e7a33879ff_th.jpg" alt="chenkun"></p>
+<p><img src="http://ent.cqwb.com.cn/image/attachement/jpg/site2/20160826/3421503376123739960.jpg" alt="chenkun"></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[mpeg2-ts协议]]></title>
       <url>http://flcker.cn/blog/2016/02/19/mpeg2-ts%E5%8D%8F%E8%AE%AE/</url>
       <content type="html"><![CDATA[<a id="more"></a>
@@ -814,6 +822,30 @@ I420 ： 亮度（行×列） ＋ U（行×列/4) + V（行×列/4）
     
   
   
+    
+    <entry>
+      <title><![CDATA[categories]]></title>
+      <url>http://flcker.cn/categories/index.html</url>
+      <content type="html"></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[tags]]></title>
+      <url>http://flcker.cn/tags/index.html</url>
+      <content type="html"></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[travels]]></title>
+      <url>http://flcker.cn/travels/index.html</url>
+      <content type="html"></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[about]]></title>
+      <url>http://flcker.cn/about/index.html</url>
+      <content type="html"></content>
+    </entry>
     
   
 </search>

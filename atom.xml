@@ -1,0 +1,1193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>青芒与鱼</title>
+  <subtitle>生活比一切都重要</subtitle>
+  <link href="/blog/atom.xml" rel="self"/>
+  
+  <link href="http://flcker.cn/"/>
+  <updated>2016-10-11T12:58:45.451Z</updated>
+  <id>http://flcker.cn/</id>
+  
+  <author>
+    <name>flcker</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>旅行记</title>
+    <link href="http://flcker.cn/2016/10/11/%E6%97%85%E8%A1%8C%E8%AE%B0/"/>
+    <id>http://flcker.cn/2016/10/11/旅行记/</id>
+    <published>2016-10-11T12:55:59.000Z</published>
+    <updated>2016-10-11T12:58:45.451Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="陈坤"><a href="#陈坤" class="headerlink" title="陈坤"></a>陈坤</h2><p><img src="http://img.mp.itc.cn/upload/20160919/07058021920149ecaf0502e7a33879ff_th.jpg" alt="chenkun"></p>
+<p><img src="http://ent.cqwb.com.cn/image/attachement/jpg/site2/20160826/3421503376123739960.jpg" alt="chenkun"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;陈坤&quot;&gt;&lt;a href=&quot;#陈坤&quot; class=&quot;headerlink&quot; title=&quot;陈坤&quot;&gt;&lt;/a&gt;陈坤&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://img.mp.itc.cn/upload/20160919/07058021920149ecaf0502e
+    
+    </summary>
+    
+      <category term="travels" scheme="http://flcker.cn/categories/travels/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>mpeg2-ts协议</title>
+    <link href="http://flcker.cn/2016/02/19/mpeg2-ts%E5%8D%8F%E8%AE%AE/"/>
+    <id>http://flcker.cn/2016/02/19/mpeg2-ts协议/</id>
+    <published>2016-02-19T07:02:24.000Z</published>
+    <updated>2016-03-14T08:52:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+    
+    </summary>
+    
+      <category term="media" scheme="http://flcker.cn/categories/media/"/>
+    
+    
+      <category term="media" scheme="http://flcker.cn/tags/media/"/>
+    
+      <category term="MPEG2-TS" scheme="http://flcker.cn/tags/MPEG2-TS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>视频编解码-学习一</title>
+    <link href="http://flcker.cn/2016/02/17/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81-%E5%AD%A6%E4%B9%A0%E4%B8%80/"/>
+    <id>http://flcker.cn/2016/02/17/视频编解码-学习一/</id>
+    <published>2016-02-17T02:55:28.000Z</published>
+    <updated>2016-02-19T04:14:37.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>学习新一代视频压缩编码标准——H.264/AVC （毕厚杰版）</p>
+<a id="more"></a>
+<hr>
+<h2 id="彩色空间"><a href="#彩色空间" class="headerlink" title="彩色空间"></a>彩色空间</h2><p>黑白图像的每个像素只需一个幅值表示<code>亮度</code>即可，而彩色图像的每个像素至少需要3个值表示<code>亮度</code>和<code>色度</code>。所谓色度空间就是彩色图像的亮度与色度的方法。</p>
+<h3 id="RGB"><a href="#RGB" class="headerlink" title="RGB"></a>RGB</h3><p>任何彩色图像可以有不同比例的红色(R)、绿色(G)和蓝色(B)组合而成，就是三基色原理，由R、G、B组成的彩色空间就是RGB空间。</p>
+<p>彩色显像管（CRT）和液晶显示器（LCD）可显示彩色图像，彩色摄像机中的电荷耦合器件（CCD）等传感器可产生彩色电视图像，都是根据RGB原理获得的。</p>
+<h3 id="YCbCr-YUV"><a href="#YCbCr-YUV" class="headerlink" title="YCbCr(YUV)"></a>YCbCr(YUV)</h3><p>人类视觉系统（HVS）对亮度比彩色敏感，因此把亮度信息从彩色信息中分离出来，使亮度具有更高的清晰度。彩色信息的清晰度降低，可以压缩带宽，实现视频压缩的一部分。</p>
+<ul>
+<li>表面原点：对于本文讲述的 YUV 格式，原点 (0,0) 总是位于表面的左上角。</li>
+<li>跨距：表面的跨距，有时也称为间距，指的是表面的宽度，以字节数表示。对于一个表面原点位于左上角的表面来说，跨距总是正数。</li>
+<li>对齐：表面的对齐是根据图形显示驱动程序的不同而定的。表面始终应该 DWORD 对齐，就是说，表面中的各个行肯定都是从 32 位 (DWORD) 边界开始的。对齐可以大于 32 位，但具体取决于硬件的需求。</li>
+<li>打包格式（<code>packed</code>）与平面格式（<code>planar</code>）：YUV格式可以分为打包格式和平面格式。在打包格式中，Y、U 和 V 组件存储在一个数组中。像素被组织到了一些巨像素组中，巨像素组的布局取决于格式。在平面格式中，Y、U 和 V 组件作为三个单独的平面进行存储。</li>
+</ul>
+<p>YUV格式有两大类：<code>planar</code>和<code>packed</code>。</p>
+<ul>
+<li>对于<code>planar</code>的YUV格式，先连续存储所有像素点的Y，紧接着存储所有像素点的U，随后是所有像素点的V。</li>
+<li>对于<code>packed</code>的YUV格式，每个像素点的Y,U,V是连续交叉存储的。</li>
+</ul>
+<p>YUV，分为三个分量，“Y”表示<code>明亮度</code>（Luminance或Luma），也就是<code>灰度值</code>；而“U”和“V” 表示的则是<code>色度</code>（Chrominance或Chroma），作用是描述影像色彩及饱和度，用于指定像素的颜色。</p>
+<p>YCbCr与RGB的的换算的标准公式：</p>
+<ul>
+<li><code>Y = (0.257 * R) + (0.504 * G) + (0.098 * B) + 16</code></li>
+<li><code>Cr = V = (0.439 * R) - (0.368 * G) - (0.071 * B) + 128</code></li>
+<li><code>Cb = U = -( 0.148 * R) - (0.291 * G) + (0.439 * B) + 128</code></li>
+</ul>
+<ul>
+<li><code>B = 1.164(Y - 16) + 2.018(U - 128)</code></li>
+<li><code>G = 1.164(Y - 16) - 0.813(V - 128) - 0.391(U - 128)</code></li>
+<li><code>R = 1.164(Y - 16) + 1.596(V - 128)</code></li>
+</ul>
+<p>YCbCr与RGB的的换算的简化公式：</p>
+<ul>
+<li><code>Y = 0.299R + 0.587G + 0.114B</code></li>
+<li><code>Cb = 0.564(B - Y)</code></li>
+<li><code>Cr = 0.713(R - Y)</code></li>
+</ul>
+<ul>
+<li><code>R = Y + 1.402Cr</code></li>
+<li><code>G = Y - 0.344Cb - 0.714Cr</code></li>
+<li><code>B = Y + 1.772Cb</code></li>
+</ul>
+<hr>
+<h2 id="彩色电视取样格式"><a href="#彩色电视取样格式" class="headerlink" title="彩色电视取样格式"></a>彩色电视取样格式</h2><p>用三个图来直观地表示采集的方式吧，以黑点表示采样该像素点的<code>Y分量</code>，以空心圆圈表示采用该像素点的<code>UV分量</code>。</p>
+<p><img src="./image/yuv_sample.jpg" alt="yuv sample"></p>
+<p>先记住下面这段话，以后提取每个像素的YUV分量会用到。</p>
+<pre><code>YUV 4:4:4采样，每一个Y对应一组UV分量。
+YUV 4:2:2采样，每两个Y共用一组UV分量。
+YUV 4:2:0采样，每四个Y共用一组UV分量。
+</code></pre><p>其实yuv420采样方式有两种常见的变化形式（亮度用叉来表示，色度样例则用圈表示）：</p>
+<p>另一种形式用于 MPEG-1 以及 ITU-T recommendations H.261 和 H.263</p>
+<p><img src="./image/yuv420-MPEG-1.gif" alt="yuv420 mepg-1 sample"></p>
+<p>MPEG-2 视频</p>
+<p><img src="./image/yuv420-MPEG-2.gif" alt="yuv420 mepg-2 sample"></p>
+<hr>
+<h2 id="YUV存储格式"><a href="#YUV存储格式" class="headerlink" title="YUV存储格式"></a>YUV存储格式</h2><p>参考： <a href="http://www.fourcc.org/yuv.php" target="_blank" rel="external">http://www.fourcc.org/yuv.php</a></p>
+<p>yuv分为packed formats和planar formats。</p>
+<p>MEDIASUBTYPE_YUY2   YUY2格式，以4:2:2方式打包<br>MEDIASUBTYPE_YUYV   YUYV格式（实际格式与YUY2相同）<br>MEDIASUBTYPE_YVYU   YVYU格式，以4:2:2方式打包<br>MEDIASUBTYPE_UYVY   UYVY格式，以4:2:2方式打包<br>MEDIASUBTYPE_AYUV   带Alpha通道的4:4:4 YUV格式<br>MEDIASUBTYPE_Y41P   Y41P格式，以4:1:1方式打包<br>MEDIASUBTYPE_Y411   Y411格式（实际格式与Y41P相同）<br>MEDIASUBTYPE_Y211   Y211格式<br>MEDIASUBTYPE_IF09   IF09格式<br>MEDIASUBTYPE_IYUV   IYUV格式<br>MEDIASUBTYPE_YV12   YV12格式<br>MEDIASUBTYPE_YVU9   YVU9格式</p>
+<h3 id="Packed-YUV-Formats"><a href="#Packed-YUV-Formats" class="headerlink" title="Packed YUV Formats"></a>Packed YUV Formats</h3><h4 id="AYUV"><a href="#AYUV" class="headerlink" title="AYUV"></a>AYUV</h4><p>4:4:4 YUV format with 8 bit samples for each component along with an 8 bit alpha blend value per pixel. Component ordering is A Y U V (as the name suggests).</p>
+<p>A就是alpha通道。</p>
+<h4 id="YUV422"><a href="#YUV422" class="headerlink" title="YUV422"></a>YUV422</h4><h5 id="UYVY"><a href="#UYVY" class="headerlink" title="UYVY"></a>UYVY</h5><p><code>UYVY</code> is probably the most popular of the various YUV 4:2:2 formats. It is output as the format of choice by the Radius Cinepak codec and is often the second choice of software MPEG codecs after YV12.（Cinepak同样是由苹果公司的软件QuickTime使用的一种很老的编解码器，好处是即使很老的计算机(如486)也都支援并且能顺利播放。）</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Horizontal</th>
+<th style="text-align:center">Vertical</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Y Sample Period</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">V Sample Period</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">U Sample Period</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">内存地址</th>
+<th style="text-align:center">内存内容（单位byte）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">start + 0</td>
+<td style="text-align:center">U Y V Y U Y V Y</td>
+</tr>
+<tr>
+<td style="text-align:center">start + 8</td>
+<td style="text-align:center">U Y V Y U Y V Y</td>
+</tr>
+<tr>
+<td style="text-align:center">start + 16</td>
+<td style="text-align:center">U Y V Y U Y V Y</td>
+</tr>
+<tr>
+<td style="text-align:center">start + 24</td>
+<td style="text-align:center">U Y V Y U Y V Y</td>
+</tr>
+</tbody>
+</table>
+<p><img src="./image/uyvy.gif" alt="UYVY"></p>
+<h5 id="YVYU"><a href="#YVYU" class="headerlink" title="YVYU"></a>YVYU</h5><p>采样方式：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Horizontal</th>
+<th style="text-align:center">Vertical</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Y Sample Period</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">V Sample Period</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">U Sample Period</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">内存地址</th>
+<th style="text-align:center">内存内容（单位byte）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">start + 0</td>
+<td style="text-align:center">Y V Y U Y V Y U</td>
+</tr>
+<tr>
+<td style="text-align:center">start + 8</td>
+<td style="text-align:center">Y V Y U Y V Y U</td>
+</tr>
+<tr>
+<td style="text-align:center">start + 16</td>
+<td style="text-align:center">Y V Y U Y V Y U</td>
+</tr>
+<tr>
+<td style="text-align:center">start + 24</td>
+<td style="text-align:center">Y V Y U Y V Y U</td>
+</tr>
+</tbody>
+</table>
+<p><img src="./image/yvyu.gif" alt="YUYV"></p>
+<h5 id="YUY2"><a href="#YUY2" class="headerlink" title="YUY2"></a>YUY2</h5><table>
+<thead>
+<tr>
+<th style="text-align:center">内存地址</th>
+<th style="text-align:center">内存内容（单位byte）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">start + 0</td>
+<td style="text-align:center">Y U Y V Y U Y V</td>
+</tr>
+<tr>
+<td style="text-align:center">start + 8</td>
+<td style="text-align:center">Y U Y V Y U Y V</td>
+</tr>
+<tr>
+<td style="text-align:center">start + 16</td>
+<td style="text-align:center">Y U Y V Y U Y V</td>
+</tr>
+<tr>
+<td style="text-align:center">start + 24</td>
+<td style="text-align:center">Y U Y V Y U Y V</td>
+</tr>
+</tbody>
+</table>
+<p><img src="./image/yuy2.gif" alt="YUY2"></p>
+<h3 id="Planar-YUV-Formats"><a href="#Planar-YUV-Formats" class="headerlink" title="Planar YUV Formats"></a>Planar YUV Formats</h3><h4 id="YV12"><a href="#YV12" class="headerlink" title="YV12"></a>YV12</h4><p>是YUV420中的一种常见格式。It comprises an NxM Y plane(平面) followed by (N/2)x(M/2) V and U planes.</p>
+<p><img src="./image/yv12.png" alt="yv12"></p>
+<h4 id="NV12"><a href="#NV12" class="headerlink" title="NV12"></a>NV12</h4><p>是YUV420中的一种常见格式。<br>YUV 4:2:0 image with a plane of 8 bit Y samples followed by an interleaved(交叉存取) U/V plane containing 8 bit 2x2 subsampled colour difference samples.</p>
+<p><img src="./image/nv12.png" alt="nv12"></p>
+<h4 id="I420"><a href="#I420" class="headerlink" title="I420"></a>I420</h4><p>I420跟YV12只有V和U的顺序相反，其他都是一样的。<br>They comprise an NxN Y plane followed by (N/2)x(N/2) U and V planes.</p>
+<pre><code>YV12 ： 亮度（行×列） ＋ V（行×列/4) + U（行×列/4）
+I420 ： 亮度（行×列） ＋ U（行×列/4) + V（行×列/4）
+</code></pre><p>yuv420p就是I420格式，使用极其广泛，它的示意图：</p>
+<p><img src="./image/i420.png" alt="yuv420p"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;学习新一代视频压缩编码标准——H.264/AVC （毕厚杰版）&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="media" scheme="http://flcker.cn/categories/media/"/>
+    
+    
+      <category term="media" scheme="http://flcker.cn/tags/media/"/>
+    
+      <category term="video" scheme="http://flcker.cn/tags/video/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>stl中list用法</title>
+    <link href="http://flcker.cn/2016/01/29/stl%E4%B8%ADlist%E7%94%A8%E6%B3%95/"/>
+    <id>http://flcker.cn/2016/01/29/stl中list用法/</id>
+    <published>2016-01-29T04:22:13.000Z</published>
+    <updated>2016-01-29T04:22:54.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="C/C++" scheme="http://flcker.cn/categories/C-C/"/>
+    
+    
+      <category term="stl" scheme="http://flcker.cn/tags/stl/"/>
+    
+      <category term="list" scheme="http://flcker.cn/tags/list/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>markdown使用技巧辑录</title>
+    <link href="http://flcker.cn/2016/01/25/markdown%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E8%BE%91%E5%BD%95/"/>
+    <id>http://flcker.cn/2016/01/25/markdown使用技巧辑录/</id>
+    <published>2016-01-25T03:59:54.000Z</published>
+    <updated>2016-01-26T07:30:34.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="下划线的使用"><a href="#下划线的使用" class="headerlink" title="下划线的使用"></a>下划线的使用</h3><p>Markdown 并无下划线的原生语法，因为会和链接的默认样式产生混淆。</p>
+<p>解决方法是使用行内 HTML. 比如：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="section"># Markdown Test</span></div><div class="line"><span class="emphasis">*Italic Text*</span></div><div class="line"><span class="strong">**Bold Text**</span></div><div class="line">&lt;u&gt;Underlined Text&lt;/u&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="段首两格缩进"><a href="#段首两格缩进" class="headerlink" title="段首两格缩进"></a>段首两格缩进</h3><p>在全角输入法下输入两格空格<br>在开头的时候，先输入这个，然后紧跟着输入文本即可。分号也不要掉。<code>&amp;#160; &amp;#160; &amp;#160; &amp;#160;</code></p>
+<a id="more"></a>
+<hr>
+<p><strong>以下摘自1分钟学会Markdown语法</strong></p>
+<h3 id="基本符号"><a href="#基本符号" class="headerlink" title="基本符号"></a>基本符号</h3><pre><code>*,-,+ 3个符号效果都一样，这3个符号被称为 Markdown符号
+空白行表示另起一个段落
+`是表示inline代码，tab是用来标记 代码段，分别对应html的code，pre标签
+</code></pre><h3 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h3><pre><code>单一段落( &lt;p&gt;) 用一个空白行
+连续两个空格 会变成一个 &lt;br&gt;
+连续3个符号，然后是空行，表示 hr横线
+</code></pre><h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><pre><code>生成h1--h6,在文字前面加上 1--6个# 来实现
+文字加粗是通过 文字左右各两个*符号
+</code></pre><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><pre><code>在第一行加上 “&gt;”和一个空格，表示代码引用，还可以嵌套
+</code></pre><h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>这个是markdown文件的主要表示方式，主题要点化</p>
+<pre><code>使用*,+,-加上一个空格来表示
+可以支持嵌套
+有序列表用 数字+英文点+空格来表示
+列表内容很长，不需要手工输入换行符，css控制段落的宽度，会自动的缩放的
+</code></pre><h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><pre><code>直接写 [锚文本](url &quot;可选的title&quot;)
+引用 先定义 [ref_name]:url，然后在需要写入url的地方， 这样使用[锚文本][ref_name]，通常的ref_name一般用数字表示，这样显得专业
+简写url：用尖括号包裹url
+这样生成的url锚文本就是url本身
+</code></pre><h3 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h3><pre><code>一行表示: ![alt_text](url &quot;可选的title&quot;)
+引用表示法: ![alt_text][id],预先定义 [id]:url &quot;可选title&quot;
+直接使用&lt;img&gt;标签，这样可以指定图片的大小尺寸
+</code></pre><h3 id="特殊符号"><a href="#特殊符号" class="headerlink" title="特殊符号"></a>特殊符号</h3><pre><code>用\来转义，表示文本中的markdown符号
+可以在文本种直接使用html标签，但是要注意在使用的时候，前后加上空行
+文本前后各加一个*符号，表示斜体
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;下划线的使用&quot;&gt;&lt;a href=&quot;#下划线的使用&quot; class=&quot;headerlink&quot; title=&quot;下划线的使用&quot;&gt;&lt;/a&gt;下划线的使用&lt;/h3&gt;&lt;p&gt;Markdown 并无下划线的原生语法，因为会和链接的默认样式产生混淆。&lt;/p&gt;
+&lt;p&gt;解决方法是使用行内 HTML. 比如：&lt;br&gt;&lt;figure class=&quot;highlight markdown&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;section&quot;&gt;# Markdown Test&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;emphasis&quot;&gt;*Italic Text*&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;strong&quot;&gt;**Bold Text**&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;u&amp;gt;Underlined Text&amp;lt;/u&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&quot;段首两格缩进&quot;&gt;&lt;a href=&quot;#段首两格缩进&quot; class=&quot;headerlink&quot; title=&quot;段首两格缩进&quot;&gt;&lt;/a&gt;段首两格缩进&lt;/h3&gt;&lt;p&gt;在全角输入法下输入两格空格&lt;br&gt;在开头的时候，先输入这个，然后紧跟着输入文本即可。分号也不要掉。&lt;code&gt;&amp;amp;#160; &amp;amp;#160; &amp;amp;#160; &amp;amp;#160;&lt;/code&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="markdown" scheme="http://flcker.cn/categories/markdown/"/>
+    
+    
+      <category term="markdown" scheme="http://flcker.cn/tags/markdown/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据存储类型auto,static,extern,register</title>
+    <link href="http://flcker.cn/2016/01/25/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%B1%BB%E5%9E%8Bauto-static-extern-register/"/>
+    <id>http://flcker.cn/2016/01/25/数据存储类型auto-static-extern-register/</id>
+    <published>2016-01-25T03:28:28.000Z</published>
+    <updated>2016-01-26T07:34:51.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>C(C++)语言中的每个变量有两个属性：<code>数据类型</code>（整形、浮点型、字符型），还有<code>数据存储类别</code>，分别为自动的(auto)，静态的(static)，寄存器的(register)和外部的(extern)。</p>
+<h2 id="extern"><a href="#extern" class="headerlink" title="extern"></a>extern</h2><p>外部变量声明，是指这是一个已在别的地方定义过的对象，这里只是对变量的一次重复引用，不会产生新的变量。</p>
+<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><p>静态数据，数据存放在全局数据区，但<strong>作用域只是本 文件/函数 中，所以你可以在两个不同的文件/函数内部申明同名的static变量，但是           它们是两个不同的全局变量。</strong> 如果是定义在函数内，那么该对象具有无链接，函数外不能对其访问。如果是定义在函数外，那么该对象具          有内部链接，其它程序文件不能对其访问</p>
+<h3 id="常见的两种用途"><a href="#常见的两种用途" class="headerlink" title="常见的两种用途"></a>常见的两种用途</h3><ol>
+<li>统计函数被调用的次数;</li>
+<li>减少局部数组建立和赋值的开销.变量的建立和赋值是需要一定的处理器开销的，特别是数组等含有较多元素的存储类型。在一些含有较多的变量并且被经常调用的函数中，可以将一些数组声明为static类型，以减少建立或者初始化这些变量的开销.</li>
+</ol>
+<h3 id="详细说明"><a href="#详细说明" class="headerlink" title="详细说明"></a>详细说明</h3><ol>
+<li>变量会被放在程序的全局存储区中，这样可以在下一次调用的时候还可以保持原来的赋值。这一点是它与堆栈变量和堆变量的区别。</li>
+<li>变量用static告知编译器，自己仅仅在变量的作用范围内可见。这一点是它与全局变量的区别。</li>
+<li>当static用来修饰全局变量时，它就改变了全局变量的作用域，使其不能被别的程序extern，限制在了当前文件里，但是没有改变其存放位置，还是在全局静态储存区。</li>
+</ol>
+<p>###　使用注意</p>
+<ol>
+<li>若全局变量仅在单个C文件中访问，则可以将这个变量修改为静态全局变量，以降低模块间的耦合度；</li>
+<li>若全局变量仅由单个函数访问，则可以将这个变量改为该函数的静态局部变量，以降低模块间的耦合度；</li>
+<li>设计和使用访问动态全局变量、静态全局变量、静态局部变量的函数时，需要考虑重入问题(只要输入数据相同就应产生相同的输出)。</li>
+</ol>
+<h2 id="auto"><a href="#auto" class="headerlink" title="auto"></a>auto</h2><p>普通局部栈变量，是自动存储，这种对象会自动创建和销毁 ，建议这个变量要放在堆栈上面，调用函数时分配内存，函数结束时释放内            存。<u>一般隐藏auto默认为自动存储类别。我们程序都变量大多是自动变量。</u></p>
+<h2 id="register"><a href="#register" class="headerlink" title="register"></a>register</h2><p>寄存器变量，请求编译器将这个变量保存在CPU的寄存器中，从而加快程序的运行。系统的寄存器是有限制的,声明变量时如:register int i.这种存储类型可以用于频繁使用的变量。</p>
+<h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><p>被const修饰的东西都受到强制保护，可以预防意外的变动，能提高程序的健壮性。它可以修饰函数的参数、返回值，甚至函数的定义体。</p>
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用:"></a>作用:</h2><h3 id="修饰输入参数"><a href="#修饰输入参数" class="headerlink" title="修饰输入参数"></a>修饰输入参数</h3><ol>
+<li>对于非内部数据类型的输入参数，应该将“值传递”的方式改为“const引用传递”，目的是提高效率。例如将void Func(A a) 改为void Func(const A &amp;a)。</li>
+<li>对于内部数据类型的输入参数，不要将“值传递”的方式改为“const引用传递”。否则既达不到提高效率的目的，又降低了函数的可理解性。例如void Func(int x) 不应该改为void Func(const int &amp;x)。</li>
+</ol>
+<h3 id="用const修饰函数的返回值"><a href="#用const修饰函数的返回值" class="headerlink" title="用const修饰函数的返回值"></a>用const修饰函数的返回值</h3><ol>
+<li><p>如果给以“指针传递”方式的函数返回值加const修饰，那么函数返回值（即指针）的内容不能被修改，该返回值只能被赋给加const修饰的同类型指针。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">　　　　　　　如对于： const char * GetString(void);</div><div class="line">　　　　　　　如下语句将出现编译错误：</div><div class="line">　　　　　　 　char *str = GetString();//cannot convert from &apos;const char *&apos; to &apos;char *&apos;；</div><div class="line">　　　　　　　正确的用法是：</div><div class="line">　　　　　　　const char *str = GetString();</div></pre></td></tr></table></figure>
+</li>
+<li><p>如果函数返回值采用“值传递方式”，由于函数会把返回值复制到外部临时的存储单元中，加const修饰没有任何价值。 如不要把函数int GetInt(void) 写成const int GetInt(void)。</p>
+</li>
+<li><p>const成员函数的声明中，const关键字只能放在函数声明的尾部,表示该类成员不修改对象.</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">说明：</div><div class="line">　　　　const type m; //修饰m为不可改变</div><div class="line">　　　示例：</div><div class="line">　　　　typedef char * pStr; //新的类型pStr;</div><div class="line">　　　　char string[4] = &quot;abc&quot;;</div><div class="line">　　　　const char *p1 = string；</div><div class="line">　　　　p1++; //正确，上边修饰的是*p1,p1可变</div><div class="line">　　　　const pStr p2 = string;</div><div class="line">　　　　p2++; //错误，上边修饰的是p2，p2不可变,*p2可变</div><div class="line">　　　同理，const修饰指针时用此原则判断就不会混淆了。</div><div class="line">　　　　const int *value; //*value不可变，value可变</div><div class="line">　　　　int* const value; //value不可变，*value可变</div><div class="line">　　　　const (int *) value; //(int *)是一种type,value不可变,*value可变</div><div class="line">　　　　　　　　　　　　　　//逻辑上这样理解，编译不能通过，需要tydef int* NewType;</div><div class="line">　　　　const int* const value;//*value,value都不可变</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;C(C++)语言中的每个变量有两个属性：&lt;code&gt;数据类型&lt;/code&gt;（整形、浮点型、字符型），还有&lt;code&gt;数据存储类别&lt;/code&gt;，分别为自动的(auto)，静态的(static)，寄存器的(register)和外部的(extern)。&lt;/p&gt;
+&lt;h2 id=&quot;
+    
+    </summary>
+    
+      <category term="C/C++" scheme="http://flcker.cn/categories/C-C/"/>
+    
+    
+      <category term="C/C++" scheme="http://flcker.cn/tags/C-C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>post</title>
+    <link href="http://flcker.cn/2016/01/21/mingw%E5%92%8Cvim%E7%9A%84%E6%90%AD%E5%BB%BA/"/>
+    <id>http://flcker.cn/2016/01/21/mingw和vim的搭建/</id>
+    <published>2016-01-21T08:18:35.000Z</published>
+    <updated>2016-01-21T09:00:31.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="mingw-w64"><a href="#mingw-w64" class="headerlink" title="mingw-w64"></a>mingw-w64</h2><p>[sourceforge]<a href="http://sourceforge.net/projects/mingw-w64/files/" target="_blank" rel="external">http://sourceforge.net/projects/mingw-w64/files/</a></p>
+<p><a href="http://mingw-w64.org/doku.php" target="_blank" rel="external">http://mingw-w64.org/doku.php</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;mingw-w64&quot;&gt;&lt;a href=&quot;#mingw-w64&quot; class=&quot;headerlink&quot; title=&quot;mingw-w64&quot;&gt;&lt;/a&gt;mingw-w64&lt;/h2&gt;&lt;p&gt;[sourceforge]&lt;a href=&quot;http://sourceforge.n
+    
+    </summary>
+    
+      <category term="工具" scheme="http://flcker.cn/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="mingw" scheme="http://flcker.cn/tags/mingw/"/>
+    
+      <category term="vim" scheme="http://flcker.cn/tags/vim/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++跨模块传递字符串参数</title>
+    <link href="http://flcker.cn/2016/01/18/C-%E8%B7%A8%E6%A8%A1%E5%9D%97%E4%BC%A0%E9%80%92%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8F%82%E6%95%B0/"/>
+    <id>http://flcker.cn/2016/01/18/C-跨模块传递字符串参数/</id>
+    <published>2016-01-18T03:23:09.000Z</published>
+    <updated>2016-01-21T07:48:34.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>上周五在封装代码的时候有这样一个需求：需要修改传进来的stl string（引用传递），测试的时候总是崩溃在给string赋值的地方。<br>函数如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">get_string</span><span class="params">( <span class="keyword">char</span> <span class="keyword">const</span> * key, <span class="keyword">const</span> <span class="keyword">char</span> * defaultOut, <span class="built_in">std</span>::<span class="built_in">string</span> &amp;out )</span></span></div><div class="line">&#123;</div><div class="line">  ......</div><div class="line"></div><div class="line">  <span class="keyword">if</span> ( <span class="built_in">strstr</span>( key, LOCALIZED_KEY_PREFIX ) != key )</div><div class="line">	&#123;</div><div class="line">		out = defaultOut; <span class="comment">// !这个地方会崩溃</span></div><div class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">	&#125;</div><div class="line">  ......</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>后来发现在同一个so中调用是可以的，但是在so外调用就出现这个问题了。</p>
+<p><strong>此外把NULL赋值给std::string也会造成崩溃，但是声明时是可以，因为</strong></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;上周五在封装代码的时候有这样一个需求：需要修改传进来的stl string（引用传递），测试的时候总是崩溃在给string赋值的地方。&lt;br&gt;函数如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutt
+    
+    </summary>
+    
+      <category term="C/C++" scheme="http://flcker.cn/categories/C-C/"/>
+    
+    
+      <category term="C/C++" scheme="http://flcker.cn/tags/C-C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hexo使用过程中遇到的问题与解决</title>
+    <link href="http://flcker.cn/2016/01/16/hexo%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3/"/>
+    <id>http://flcker.cn/2016/01/16/hexo使用过程中遇到的问题与解决/</id>
+    <published>2016-01-16T13:16:59.000Z</published>
+    <updated>2016-01-21T07:48:34.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="hexo-使用中遇到的问题"><a href="#hexo-使用中遇到的问题" class="headerlink" title="hexo 使用中遇到的问题"></a>hexo 使用中遇到的问题</h1><p>这里会列举hexo使用过程中遇到的问题，会不断的增加。</p>
+<a id="more"></a>
+<h2 id="hexo-deploy在windows上出现的问题"><a href="#hexo-deploy在windows上出现的问题" class="headerlink" title="hexo deploy在windows上出现的问题"></a>hexo deploy在windows上出现的问题</h2><h3 id="问题一bash-dev-tty-No-such-device-or-address"><a href="#问题一bash-dev-tty-No-such-device-or-address" class="headerlink" title="问题一bash: /dev/tty: No such device or address"></a>问题一<code>bash: /dev/tty: No such device or address</code></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">INFO  Deploying: git</div><div class="line">INFO  Clearing .deploy folder...</div><div class="line">INFO  Copying files from public folder...</div><div class="line">On branch master</div><div class="line">nothing to commit, working directory clean</div><div class="line">bash: /dev/tty: No such device or address</div><div class="line">error: failed to execute prompt script (exit code 1)</div><div class="line">fatal: could not read Username for &apos;https://github.com&apos;: Invalid argument</div><div class="line">FATAL Something&apos;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html</div><div class="line">Error: bash: /dev/tty: No such device or address</div><div class="line">error: failed to execute prompt script (exit code 1)</div><div class="line">fatal: could not read Username for &apos;https://github.com&apos;: Invalid argument</div><div class="line"></div><div class="line">    at ChildProcess.&lt;anonymous&gt; (D:\hexo\node_modules\hexo-deployer-git\node_modules\hexo-util\lib\spawn.js:42:17)</div><div class="line">    at emitTwo (events.js:87:13)</div><div class="line">    at ChildProcess.emit (events.js:172:7)</div><div class="line">    at maybeClose (internal/child_process.js:818:16)</div><div class="line">    at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)</div><div class="line">FATAL Error: bash: /dev/tty: No such device or address</div><div class="line">error: failed to execute prompt script (exit code 1)</div><div class="line">fatal: could not read Username for &apos;https://github.com&apos;: Invalid argument</div><div class="line"></div><div class="line">    at ChildProcess.&lt;anonymous&gt; (D:\hexo\node_modules\hexo-deployer-git\node_modules\hexo-util\lib\spawn.js:42:17)</div><div class="line">    at emitTwo (events.js:87:13)</div><div class="line">    at ChildProcess.emit (events.js:172:7)</div><div class="line">    at maybeClose (internal/child_process.js:818:16)</div><div class="line">    at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)</div></pre></td></tr></table></figure>
+<p>出现这个问题，一般有两个原因：</p>
+<ul>
+<li><p>git没有设置用户和邮箱<br>解决办法:</p>
+<blockquote>
+<p>git config –global user.name “”<br>git config –global user.email “”</p>
+</blockquote>
+</li>
+<li><p>用的windows的cmd部署的<br>解决办法：</p>
+<blockquote>
+<p>把hexo deploy配置里面的 repository 改为以ssh方式提交<br>或者：用git bash或者git cmd运行hexo d部署</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="hexo-deploy把整个hexo目录都上传了"><a href="#hexo-deploy把整个hexo目录都上传了" class="headerlink" title="hexo deploy把整个hexo目录都上传了"></a>hexo deploy把整个hexo目录都上传了</h2><p>因为为了防止hexo代码无法恢复，所以我把hexo代码同步到github上了，当我从github上pull下来生产静态博客并发布时就出现这个问题。</p>
+<p>究其原因，因为从github上pull下来的代码是有.git文件夹的，这个是用于git本地和远程仓库操作的，hexo-deploy-git使用的也是git会造成干扰。</p>
+<p>解决办法：<br>方法一：</p>
+<blockquote>
+<p>直接删除.git文件夹，简单粗暴</p>
+</blockquote>
+<p>方法二：</p>
+<blockquote>
+<p>给.git改个名字，当你向同步hexo代码时在改回来</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;hexo-使用中遇到的问题&quot;&gt;&lt;a href=&quot;#hexo-使用中遇到的问题&quot; class=&quot;headerlink&quot; title=&quot;hexo 使用中遇到的问题&quot;&gt;&lt;/a&gt;hexo 使用中遇到的问题&lt;/h1&gt;&lt;p&gt;这里会列举hexo使用过程中遇到的问题，会不断的增加。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="hexo" scheme="http://flcker.cn/categories/hexo/"/>
+    
+    
+      <category term="git" scheme="http://flcker.cn/tags/git/"/>
+    
+      <category term="hexo" scheme="http://flcker.cn/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git常用命令</title>
+    <link href="http://flcker.cn/2016/01/16/git-s-commands/"/>
+    <id>http://flcker.cn/2016/01/16/git-s-commands/</id>
+    <published>2016-01-16T09:04:51.000Z</published>
+    <updated>2016-01-21T08:17:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Git常用命令"><a href="#Git常用命令" class="headerlink" title="Git常用命令"></a>Git常用命令</h1><h2 id="查看、添加、提交、删除、找回，重置修改文件"><a href="#查看、添加、提交、删除、找回，重置修改文件" class="headerlink" title="查看、添加、提交、删除、找回，重置修改文件"></a>查看、添加、提交、删除、找回，重置修改文件</h2><ul>
+<li><code>git help &lt;command&gt;</code> # 显示command的help</li>
+<li><code>git show</code> # 显示某次提交的内容 git show $id</li>
+<li><code>git co -- &lt;file&gt;</code> # 抛弃工作区修改</li>
+<li><code>git co .</code> # 抛弃工作区修改</li>
+<li><code>git add &lt;file&gt;</code> # 将工作文件修改提交到本地暂存区</li>
+<li><code>git add .</code> # 将所有修改过的工作文件提交暂存区</li>
+<li><code>git rm &lt;file&gt;</code> # 从版本库中删除文件</li>
+<li><code>git rm &lt;file&gt; --cached</code> # 从版本库中删除文件，但不删除文件</li>
+<li><code>git reset &lt;file&gt;</code> # 从暂存区恢复到工作文件</li>
+<li><code>git reset -- .</code> # 从暂存区恢复到工作文件</li>
+<li><code>git reset --hard</code> # 恢复最近一次提交过的状态，即放弃上次提交后的所有本次修改</li>
+<li><code>git ci &lt;file&gt;</code>  <code>git ci .</code> <code>git ci -a</code> # 将git add, git rm和git ci等操作都合并在一起做<code>git ci -am &quot;some comments&quot;</code></li>
+<li><code>git ci --amend</code> # 修改最后一次提交记录</li>
+<li><code>git revert &lt;$id&gt;</code> # 恢复某次提交的状态，恢复动作本身也创建次提交对象</li>
+<li><code>git revert HEAD</code> # 恢复最后一次提交的状态</li>
+</ul>
+<a id="more"></a>
+<h2 id="查看文件diff"><a href="#查看文件diff" class="headerlink" title="查看文件diff"></a>查看文件diff</h2><ul>
+<li><code>git diff &lt;file&gt;</code> # 比较当前文件和暂存区文件差异 git diff</li>
+<li><code>git diff &lt;id1&gt;&lt;id2&gt;</code> # 比较两次提交之间的差异</li>
+<li><code>git diff &lt;branch1&gt;..&lt;branch2&gt;</code> # 在两个分支之间比较</li>
+<li><code>git diff --staged</code> # 比较暂存区和版本库差异</li>
+<li><code>git diff --cached</code> # 比较暂存区和版本库差异</li>
+<li><code>git diff --stat</code> # 仅仅比较统计信息</li>
+</ul>
+<h2 id="查看提交记录"><a href="#查看提交记录" class="headerlink" title="查看提交记录"></a>查看提交记录</h2><ul>
+<li><code>git log</code> <code>git log &lt;file&gt;</code> # 查看该文件每次提交记录</li>
+<li><code>git log -p &lt;file&gt;</code> # 查看每次详细修改内容的diff</li>
+<li><code>git log -p -2</code> # 查看最近两次详细修改内容的diff</li>
+<li><code>git log --stat</code> #查看提交统计信息</li>
+</ul>
+<h2 id="tig"><a href="#tig" class="headerlink" title="tig"></a>tig</h2><ul>
+<li>Mac上可以使用tig代替diff和log，brew install tig</li>
+</ul>
+<h2 id="Git-本地分支管理"><a href="#Git-本地分支管理" class="headerlink" title="Git 本地分支管理"></a>Git 本地分支管理</h2><h3 id="查看、切换、创建和删除分支"><a href="#查看、切换、创建和删除分支" class="headerlink" title="查看、切换、创建和删除分支"></a>查看、切换、创建和删除分支</h3><ul>
+<li><code>git br -r</code> # 查看远程分支</li>
+<li><code>git br &lt;new_branch&gt;</code> # 创建新的分支</li>
+<li><code>git br -v</code> # 查看各个分支最后提交信息</li>
+<li><code>git br --merged</code> # 查看已经被合并到当前分支的分支</li>
+<li><p><code>git br --no-merged</code> # 查看尚未被合并到当前分支的分支</p>
+</li>
+<li><p><code>git co &lt;branch&gt;</code> # 切换到某个分支</p>
+</li>
+<li><code>git co -b &lt;new_branch&gt;</code> # 创建新的分支，并且切换过去</li>
+<li><code>git co -b &lt;new_branch&gt; &lt;branch&gt;</code> # 基于branch创建新的new_branch</li>
+<li><code>git co $id</code> # 把某次历史提交记录checkout出来，但无分支信息，切换到其他分支会自动删除</li>
+<li><p><code>git co $id -b &lt;new_branch&gt;</code> # 把某次历史提交记录checkout出来，创建成一个分支</p>
+</li>
+<li><p><code>git br -d &lt;branch&gt;</code> # 删除某个分支</p>
+</li>
+<li><code>git br -D &lt;branch&gt;</code> # 强制删除某个分支 (未被合并的分支被删除的时候需要强制)</li>
+</ul>
+<h3 id="分支合并和rebase"><a href="#分支合并和rebase" class="headerlink" title="分支合并和rebase"></a>分支合并和rebase</h3><ul>
+<li><code>git merge &lt;branch&gt;</code> # 将branch分支合并到当前分支</li>
+<li><code>git merge origin/master --no-ff</code> # 不要Fast-Foward合并，这样可以生成merge提交</li>
+<li><code>git rebase master &lt;branch&gt;</code> # 将master rebase到branch，相当于： <code>git co &lt;branch&gt; &amp;&amp; git rebase master &amp;&amp; git co master &amp;&amp; git merge &lt;branch&gt;</code></li>
+</ul>
+<h3 id="Git补丁管理-方便在多台机器上开发同步时用"><a href="#Git补丁管理-方便在多台机器上开发同步时用" class="headerlink" title="Git补丁管理(方便在多台机器上开发同步时用)"></a>Git补丁管理(方便在多台机器上开发同步时用)</h3><ul>
+<li><code>git diff &gt; ../sync.patch</code> # 生成补丁</li>
+<li><code>git apply ../sync.patch</code> # 打补丁</li>
+<li><code>git apply --check ../sync.patch</code> #测试补丁能否成功</li>
+</ul>
+<h3 id="Git暂存管理"><a href="#Git暂存管理" class="headerlink" title="Git暂存管理"></a>Git暂存管理</h3><ul>
+<li><code>git stash</code> # 暂存</li>
+<li><code>git stash list</code> # 列所有stash</li>
+<li><code>git stash apply</code> # 恢复暂存的内容</li>
+<li><code>git stash drop</code> # 删除暂存区</li>
+</ul>
+<h3 id="Git远程分支管理"><a href="#Git远程分支管理" class="headerlink" title="Git远程分支管理"></a>Git远程分支管理</h3><ul>
+<li><code>git pull</code> # 抓取远程仓库所有分支更新并合并到本地</li>
+<li><code>git pull --no-ff</code> # 抓取远程仓库所有分支更新并合并到本地，不要快进合并</li>
+<li><code>git fetch origin</code> # 抓取远程仓库更新</li>
+<li><code>git merge origin/master</code> # 将远程主分支合并到本地当前分支</li>
+<li><code>git co --track origin/branch</code> # 跟踪某个远程分支创建相应的本地分支</li>
+<li><code>git co -b &lt;local_branch&gt; origin/&lt;remote_branch&gt;</code> # 基于远程分支创建本地分支，功能同上</li>
+<li><code>git push</code> # push所有分支</li>
+<li><code>git push origin master</code> # 将本地主分支推到远程主分支</li>
+<li><code>git push -u origin master</code> # 将本地主分支推到远程(如无远程主分支则创建，用于初始化远程仓库)</li>
+<li><code>git push origin &lt;local_branch&gt;</code> # 创建远程分支， origin是远程仓库名</li>
+<li><code>git push origin &lt;local_branch&gt;:&lt;remote_branch&gt;</code> # 创建远程分支</li>
+<li><code>git push origin :&lt;remote_branch&gt;</code> #先删除本地分支(<code>git br -d &lt;branch&gt;</code>)，然后再push删除远程分支</li>
+</ul>
+<h2 id="Git远程仓库管理"><a href="#Git远程仓库管理" class="headerlink" title="Git远程仓库管理"></a>Git远程仓库管理</h2><h3 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h3><ul>
+<li><code>git remote -v</code> # 查看远程服务器地址和仓库名称</li>
+<li><code>git remote show origin</code> # 查看远程服务器仓库状态</li>
+<li><code>git remote add origin git@github:xxx/xxx.git</code> # 添加远程仓库地址</li>
+<li><code>git remote set-url origin git@github.com:xxx/xxx.git</code> # 设置远程仓库地址(用于修改远程仓库地址) git remote rm <repository> # 删除远程仓库</repository></li>
+</ul>
+<h3 id="创建远程仓库"><a href="#创建远程仓库" class="headerlink" title="创建远程仓库"></a>创建远程仓库</h3><ul>
+<li><code>git clone --bare xxx xxx.git</code> # 用带版本的项目创建纯版本仓库</li>
+<li><code>mkdir xxx_repo.git &amp;&amp; cd xxx_repo.git &amp;&amp; git --bare init</code> # 在服务器创建纯仓库</li>
+<li><code>git remote add origin git@github.com:xxx/xxx_repo.git</code> # 设置远程仓库地址</li>
+<li><code>git push -u origin master</code> # 客户端首次提交</li>
+<li><code>git push -u origin truck_daily</code> # 首次将本地truck_daily分支提交到远程truck_daily分支，并且track</li>
+<li><code>git remote set-head origin master</code> # 设置远程仓库的HEAD指向master分支</li>
+</ul>
+<h3 id="命令设置跟踪远程库和本地库"><a href="#命令设置跟踪远程库和本地库" class="headerlink" title="命令设置跟踪远程库和本地库"></a>命令设置跟踪远程库和本地库</h3><ul>
+<li><code>git branch --set-upstream master origin/master</code></li>
+<li><code>git branch --set-upstream truck_daily origin/truck_daily</code></li>
+</ul>
+<h1 id="使用技巧"><a href="#使用技巧" class="headerlink" title="使用技巧"></a>使用技巧</h1><h2 id="从远程下载代码到本地"><a href="#从远程下载代码到本地" class="headerlink" title="从远程下载代码到本地"></a>从远程下载代码到本地</h2><ul>
+<li><p>方式一：</p>
+<blockquote>
+<p><code>git clone url</code>这个会自动建立目录（名为仓库名字）</p>
+</blockquote>
+</li>
+<li><p>方式二：</p>
+<blockquote>
+<p>git init<br>git remote add origin url<br>git checkout -b master<br>git pull origin master</p>
+</blockquote>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Git常用命令&quot;&gt;&lt;a href=&quot;#Git常用命令&quot; class=&quot;headerlink&quot; title=&quot;Git常用命令&quot;&gt;&lt;/a&gt;Git常用命令&lt;/h1&gt;&lt;h2 id=&quot;查看、添加、提交、删除、找回，重置修改文件&quot;&gt;&lt;a href=&quot;#查看、添加、提交、删除、找回，重置修改文件&quot; class=&quot;headerlink&quot; title=&quot;查看、添加、提交、删除、找回，重置修改文件&quot;&gt;&lt;/a&gt;查看、添加、提交、删除、找回，重置修改文件&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;git help &amp;lt;command&amp;gt;&lt;/code&gt; # 显示command的help&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git show&lt;/code&gt; # 显示某次提交的内容 git show $id&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git co -- &amp;lt;file&amp;gt;&lt;/code&gt; # 抛弃工作区修改&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git co .&lt;/code&gt; # 抛弃工作区修改&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git add &amp;lt;file&amp;gt;&lt;/code&gt; # 将工作文件修改提交到本地暂存区&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git add .&lt;/code&gt; # 将所有修改过的工作文件提交暂存区&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git rm &amp;lt;file&amp;gt;&lt;/code&gt; # 从版本库中删除文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git rm &amp;lt;file&amp;gt; --cached&lt;/code&gt; # 从版本库中删除文件，但不删除文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git reset &amp;lt;file&amp;gt;&lt;/code&gt; # 从暂存区恢复到工作文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git reset -- .&lt;/code&gt; # 从暂存区恢复到工作文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git reset --hard&lt;/code&gt; # 恢复最近一次提交过的状态，即放弃上次提交后的所有本次修改&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git ci &amp;lt;file&amp;gt;&lt;/code&gt;  &lt;code&gt;git ci .&lt;/code&gt; &lt;code&gt;git ci -a&lt;/code&gt; # 将git add, git rm和git ci等操作都合并在一起做&lt;code&gt;git ci -am &amp;quot;some comments&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git ci --amend&lt;/code&gt; # 修改最后一次提交记录&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git revert &amp;lt;$id&amp;gt;&lt;/code&gt; # 恢复某次提交的状态，恢复动作本身也创建次提交对象&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git revert HEAD&lt;/code&gt; # 恢复最后一次提交的状态&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="git" scheme="http://flcker.cn/categories/git/"/>
+    
+    
+      <category term="git" scheme="http://flcker.cn/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>atom快捷键</title>
+    <link href="http://flcker.cn/2016/01/16/atom%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+    <id>http://flcker.cn/2016/01/16/atom快捷键/</id>
+    <published>2016-01-16T07:40:16.000Z</published>
+    <updated>2016-01-21T07:48:34.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Atom-快捷键列表"><a href="#Atom-快捷键列表" class="headerlink" title="Atom 快捷键列表"></a>Atom 快捷键列表</h1><h2 id="文件切换"><a href="#文件切换" class="headerlink" title="文件切换"></a>文件切换</h2><ul>
+<li>ctrl-shift-s 保存所有打开的文件</li>
+<li>cmd-shift-o 打开目录</li>
+<li>cmd-\ 显示或隐藏目录树</li>
+<li>ctrl-0 焦点移到目录树</li>
+<li>目录树下，使用a，m，delete来增加，修改和删除</li>
+<li>cmd-t或cmd-p 查找文件</li>
+<li>cmd-b 在打开的文件之间切换</li>
+<li>cmd-shift-b 只搜索从上次git commit后修改或者新增的文件</li>
+</ul>
+<a id="more"></a>
+<h2 id="导航"><a href="#导航" class="headerlink" title="导航"></a>导航</h2><p><em>（等价于上下左右）</em></p>
+<ul>
+<li>ctrl-p 前一行</li>
+<li>ctrl-n 后一行</li>
+<li>ctrl-f 前一个字符</li>
+<li><p>ctrl-b 后一个字符</p>
+</li>
+<li><p>alt-B, alt-left 移动到单词开始</p>
+</li>
+<li><p>alt-F, alt-right 移动到单词末尾</p>
+</li>
+<li><p>cmd-right, ctrl-E 移动到一行结束</p>
+</li>
+<li><p>cmd-left, ctrl-A 移动到一行开始</p>
+</li>
+<li><p>cmd-up 移动到文件开始</p>
+</li>
+<li><p>cmd-down 移动到文件结束</p>
+</li>
+<li><p>ctrl-g 移动到指定行 row:column 处</p>
+</li>
+<li><p>cmd-r 在方法之间跳转</p>
+</li>
+</ul>
+<p><em>注：用到cmd键的只在mac上有效果</em></p>
+<h2 id="书签"><a href="#书签" class="headerlink" title="书签"></a>书签</h2><ul>
+<li>cmd-F2 在本行增加书签</li>
+<li>F2 跳到当前文件的下一条书签</li>
+<li>shift-F2 跳到当前文件的上一条书签</li>
+<li>ctrl-F2 列出当前工程所有书签</li>
+</ul>
+<h2 id="选取"><a href="#选取" class="headerlink" title="选取"></a>选取</h2><p><em>大部分和导航一致，只不过加上shift</em></p>
+<ul>
+<li>ctrl-shift-P 选取至上一行</li>
+<li>ctrl-shift-N 选取至下一样</li>
+<li>ctrl-shift-B 选取至前一个字符</li>
+<li>ctrl-shift-F 选取至后一个字符</li>
+<li>alt-shift-B, alt-shift-left 选取至字符开始</li>
+<li>alt-shift-F, alt-shift-right 选取至字符结束</li>
+<li>ctrl-shift-E, cmd-shift-right 选取至本行结束</li>
+<li>ctrl-shift-A, cmd-shift-left 选取至本行开始</li>
+<li>cmd-shift-up 选取至文件开始</li>
+<li>cmd-shift-down 选取至文件结尾</li>
+<li>cmd-A 全选</li>
+<li>cmd-L 选取一行，继续按回选取下一行</li>
+<li>ctrl-shift-W 选取当前单词</li>
+</ul>
+<h2 id="编辑和删除文本"><a href="#编辑和删除文本" class="headerlink" title="编辑和删除文本"></a>编辑和删除文本</h2><h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><ul>
+<li>ctrl-T 使光标前后字符交换</li>
+<li>cmd-J 将下一行与当前行合并</li>
+<li>ctrl-cmd-up, ctrl-cmd-down 使当前行向上或者向下移动</li>
+<li>cmd-shift-D 复制当前行到下一行</li>
+<li>cmd-K, cmd-U 使当前字符大写</li>
+<li>cmd-K, cmd-L 使当前字符小写</li>
+</ul>
+<h3 id="删除和剪切"><a href="#删除和剪切" class="headerlink" title="删除和剪切"></a>删除和剪切</h3><ul>
+<li>ctrl-shift-K 删除当前行</li>
+<li>cmd-backspace 删除到当前行开始</li>
+<li>cmd-fn-backspace 删除到当前行结束</li>
+<li>ctrl-K 剪切到当前行结束</li>
+<li>alt-backspace 或 alt-H 删除到当前单词开始</li>
+<li>alt-delete 或 alt-D 删除到当前单词结束</li>
+</ul>
+<h3 id="多光标和多处选取"><a href="#多光标和多处选取" class="headerlink" title="多光标和多处选取"></a>多光标和多处选取</h3><ul>
+<li>cmd-click 增加新光标</li>
+<li>cmd-shift-L 将多行选取改为多行光标</li>
+<li>ctrl-shift-up, ctrl-shift-down 增加上（下）一行光标</li>
+<li>cmd-D 选取文档中和当前单词相同的下一处</li>
+<li>ctrl-cmd-G 选取文档中所有和当前光标单词相同的位置</li>
+</ul>
+<h3 id="括号跳转"><a href="#括号跳转" class="headerlink" title="括号跳转"></a>括号跳转</h3><ul>
+<li>ctrl-m 相应括号之间，html tag之间等跳转</li>
+<li>ctrl-cmd-m 括号(tag)之间文本选取</li>
+<li>alt-cmd-. 关闭当前XML/HTML tag</li>
+</ul>
+<h3 id="编码方式"><a href="#编码方式" class="headerlink" title="编码方式"></a>编码方式</h3><ul>
+<li>ctrl-shift-U 调出切换编码选项</li>
+</ul>
+<h3 id="查找和替换"><a href="#查找和替换" class="headerlink" title="查找和替换"></a>查找和替换</h3><ul>
+<li>cmd-F 在buffer中查找</li>
+<li>cmd-shift-f 在整个工程中查找</li>
+</ul>
+<h3 id="代码片段"><a href="#代码片段" class="headerlink" title="代码片段"></a>代码片段</h3><ul>
+<li>alt-shift-S 查看当前可用代码片段<br>在~/.atom目录下snippets.cson文件中存放了你定制的snippets<br>定制说明</li>
+</ul>
+<h3 id="自动补全"><a href="#自动补全" class="headerlink" title="自动补全"></a>自动补全</h3><ul>
+<li>ctrl-space 提示补全信息</li>
+</ul>
+<h2 id="折叠"><a href="#折叠" class="headerlink" title="折叠"></a>折叠</h2><ul>
+<li>alt-cmd-[ 折叠</li>
+<li>alt-cmd-] 展开</li>
+<li>alt-cmd-shift-{ 折叠全部</li>
+<li>alt-cmd-shift-} 展开全部</li>
+<li>cmd-k cmd-N 指定折叠层级 N为层级数</li>
+</ul>
+<h2 id="文件语法高亮"><a href="#文件语法高亮" class="headerlink" title="文件语法高亮"></a>文件语法高亮</h2><ul>
+<li>ctrl-shift-L 选择文本类型</li>
+</ul>
+<h2 id="使用Atom进行写作"><a href="#使用Atom进行写作" class="headerlink" title="使用Atom进行写作"></a>使用Atom进行写作</h2><ul>
+<li>ctrl-shift-M Markdown预览</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Atom-快捷键列表&quot;&gt;&lt;a href=&quot;#Atom-快捷键列表&quot; class=&quot;headerlink&quot; title=&quot;Atom 快捷键列表&quot;&gt;&lt;/a&gt;Atom 快捷键列表&lt;/h1&gt;&lt;h2 id=&quot;文件切换&quot;&gt;&lt;a href=&quot;#文件切换&quot; class=&quot;headerlink&quot; title=&quot;文件切换&quot;&gt;&lt;/a&gt;文件切换&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;ctrl-shift-s 保存所有打开的文件&lt;/li&gt;
+&lt;li&gt;cmd-shift-o 打开目录&lt;/li&gt;
+&lt;li&gt;cmd-\ 显示或隐藏目录树&lt;/li&gt;
+&lt;li&gt;ctrl-0 焦点移到目录树&lt;/li&gt;
+&lt;li&gt;目录树下，使用a，m，delete来增加，修改和删除&lt;/li&gt;
+&lt;li&gt;cmd-t或cmd-p 查找文件&lt;/li&gt;
+&lt;li&gt;cmd-b 在打开的文件之间切换&lt;/li&gt;
+&lt;li&gt;cmd-shift-b 只搜索从上次git commit后修改或者新增的文件&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="atom" scheme="http://flcker.cn/categories/atom/"/>
+    
+    
+      <category term="atom" scheme="http://flcker.cn/tags/atom/"/>
+    
+      <category term="git" scheme="http://flcker.cn/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>string操作</title>
+    <link href="http://flcker.cn/2016/01/15/c%E8%AF%AD%E8%A8%80%E4%B8%ADstring%E6%93%8D%E4%BD%9C/"/>
+    <id>http://flcker.cn/2016/01/15/c语言中string操作/</id>
+    <published>2016-01-15T03:31:30.000Z</published>
+    <updated>2016-01-21T07:48:34.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>这里辑录一些C语言中的字符串操作函数，在做VR引擎中遇到会在C中操作Android工程中string.xml的情况，需要处理字符串。</p>
+<a id="more"></a>
+<hr>
+<h2 id="strlen"><a href="#strlen" class="headerlink" title="strlen"></a>strlen</h2><p>strlen所作的仅仅是一个计数器的工作，它从内存的某个位置（可以是字符串开头，中间某个位置，甚至是某个不确定的内存区域）开始扫描，直到碰到第一个字符串结束符’\0’为止，然后返回计数器值(长度不包含’\0’)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">原型：extern int strlen(char *s);</div><div class="line">用法：#include &lt;string.h&gt;</div><div class="line">功能：计算字符串s的长度</div><div class="line">说明：返回s的长度，不包括结束符NULL。</div></pre></td></tr></table></figure>
+<p>与sizeof的区别：</p>
+<ul>
+<li>sizeof是C语言关键字，不是函数</li>
+<li>strlen(char*）函数求的是字符串的实际长度，它求得方法是从开始到遇到第一个’\0’，如果你只定义没有给它赋初值，这个结果是不定的，它会从aa首地址一直找下去，直到遇到’\0’停止。</li>
+<li>sizeof返回的是变量声明后所占的内存数，不是实际长度</li>
+</ul>
+<hr>
+<h2 id="strstr"><a href="#strstr" class="headerlink" title="strstr"></a>strstr</h2><p>strstr(str1,str2) 函数用于判断字符串str2是否是str1的子串。如果是，则该函数返回str2在str1中首次出现的地址；否则，返回NULL。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">原型：extern char *strstr(char *haystack, char *needle);</div><div class="line">用法：#include &lt;string.h&gt;</div><div class="line">功能：从字符串haystack中寻找needle第一次出现的位置（不比较结束符NULL)。</div><div class="line">说明：返回指向第一次出现needle位置的指针，如果没找到则返回NULL。</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这里辑录一些C语言中的字符串操作函数，在做VR引擎中遇到会在C中操作Android工程中string.xml的情况，需要处理字符串。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="C/C++" scheme="http://flcker.cn/categories/C-C/"/>
+    
+    
+      <category term="string" scheme="http://flcker.cn/tags/string/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Jni数据类型的操作</title>
+    <link href="http://flcker.cn/2016/01/14/Jni%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%93%8D%E4%BD%9C/"/>
+    <id>http://flcker.cn/2016/01/14/Jni数据类型的操作/</id>
+    <published>2016-01-14T07:59:36.000Z</published>
+    <updated>2016-01-21T07:48:34.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>Jni把Java字符串当成<code>引用类型</code>来处理，这些引用类型不能像原生C字符串一样可以直接使用，Jni提供了Java字符串与C字符串之间相互转换的必要函数。<br>Java字符串是不可变的，Jni中也没有提供修改Java字符串内容的接口函数。<br>Jni支持Unicode编码和UTF-8编码格式的字符串。</p>
+<a id="more"></a>
+<h3 id="原生代码中创建字符串"><a href="#原生代码中创建字符串" class="headerlink" title="原生代码中创建字符串"></a>原生代码中创建字符串</h3><p>在原声代码中可以通过<code>NewString</code>创建Unicode编码格式的字符串实例，<br>用<code>NewStringUTF</code>创建UTF-8编码格式的字符串实例，两个函数都需要传入一个C字符串的参数，然后返回一个Java字符串引用类型的jstring值。</p>
+<p>C中的用法，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">jstring javaString;</div><div class="line">javaString = (*env)-&gt;NewStringUTF( env, &quot;Hello World!&quot;);</div></pre></td></tr></table></figure></p>
+<p>如果内存溢出，这些函数返回NULL以通知原生代码虚拟机中抛出的异常，这样原生代码就会停止运行。</p>
+<h3 id="把Java字符串引用转换为C字符串"><a href="#把Java字符串引用转换为C字符串" class="headerlink" title="把Java字符串引用转换为C字符串"></a>把Java字符串引用转换为C字符串</h3><ul>
+<li><p>Unicode格式字符串：<code>GetStringChars</code></p>
+<blockquote>
+<p>const jchar<em> (</em>GetStringChars)(JNIEnv<em>, jstring, jboolean</em>);</p>
+</blockquote>
+</li>
+<li><p>UTF-8字符串：<code>GetStringUTFChars</code></p>
+<blockquote>
+<p> const char<em> (</em>GetStringUTFChars)(JNIEnv<em>, jstring, jboolean</em>);</p>
+</blockquote>
+</li>
+</ul>
+<p>C中的用法，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">const jbyte* str;</div><div class="line">jboolean isCopy;</div><div class="line"></div><div class="line">str = (*env)-&gt;GetStringUTFChars( env, javaString, &amp;isCopy);</div><div class="line">if( NULL != str )</div><div class="line">&#123;</div><div class="line">  printf( &quot;Java String : %s&quot;, str);</div><div class="line">  if(JNI_TRUE == isCopy)</div><div class="line">  &#123;</div><div class="line">    printf(&quot;C string is a copy of the Java String&quot;);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="jobject到jstring"><a href="#jobject到jstring" class="headerlink" title="jobject到jstring"></a>jobject到jstring</h3><p>Java函数返回的Java String，JNI中返回的是jobject，需要将jobject转换为jstring，然后再由jstring生成C字符串。</p>
+<p>下边是我的错误用法：</p>
+<blockquote>
+<p>jstring result_str = jni-&gt;CallObjectMethod( lvrlib_class, get_localized_string_id, activityObj, jKey);</p>
+</blockquote>
+<p>报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">jni/../../../src/lvr_locale.cpp:62:103: error: invalid conversion from &apos;jobject &#123;aka _jobject*&#125;&apos; to &apos;jstring &#123;aka _jstring*&#125;&apos; [-fpermissive]</div><div class="line">jstring result_str = jni-&gt;CallObjectMethod( lvrlib_class, get_localized_string_id, activityObj, jKey);</div></pre></td></tr></table></figure></p>
+<p>即是无法从jobject到jstring隐式转换，所以出现错误。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;字符串&quot;&gt;&lt;a href=&quot;#字符串&quot; class=&quot;headerlink&quot; title=&quot;字符串&quot;&gt;&lt;/a&gt;字符串&lt;/h2&gt;&lt;p&gt;Jni把Java字符串当成&lt;code&gt;引用类型&lt;/code&gt;来处理，这些引用类型不能像原生C字符串一样可以直接使用，Jni提供了Java字符串与C字符串之间相互转换的必要函数。&lt;br&gt;Java字符串是不可变的，Jni中也没有提供修改Java字符串内容的接口函数。&lt;br&gt;Jni支持Unicode编码和UTF-8编码格式的字符串。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://flcker.cn/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="http://flcker.cn/tags/Android/"/>
+    
+      <category term="Jni" scheme="http://flcker.cn/tags/Jni/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>android中string.xml的使用</title>
+    <link href="http://flcker.cn/2016/01/14/android%E4%B8%ADstring-xml%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>http://flcker.cn/2016/01/14/android中string-xml的使用/</id>
+    <published>2016-01-14T04:16:17.000Z</published>
+    <updated>2016-01-21T07:48:34.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="获取string-xml文件里面的值有几个不同的地方"><a href="#获取string-xml文件里面的值有几个不同的地方" class="headerlink" title="获取string.xml文件里面的值有几个不同的地方"></a>获取string.xml文件里面的值有几个不同的地方</h2><ol>
+<li><p>在AndroidManifest.xml与layout等xml文件里:</p>
+<blockquote>
+<p>   android:text=”@string/resource_name”</p>
+</blockquote>
+</li>
+<li><p>在activity里：</p>
+<blockquote>
+<p>方法一:this.getString(R.string.resource_name);<br>方法二:getResources().getString(R.string.resource_name);</p>
+</blockquote>
+</li>
+<li><p>在其他java文件（必须有Context或pplication）</p>
+<blockquote>
+<p>方法一: context.getString(R.string.resource_name);<br>方法二: application.getString(R.string.resource_name);  </p>
+</blockquote>
+</li>
+</ol>
+<a id="more"></a>
+<hr>
+<h2 id="android中string-xml文件的使用"><a href="#android中string-xml文件的使用" class="headerlink" title="android中string.xml文件的使用"></a>android中string.xml文件的使用</h2><p>1.在程序中获取string.xml中字符串</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line"></div><div class="line">&lt;resources&gt;</div><div class="line"></div><div class="line">    &lt;string name=&quot;hello&quot;&gt;Hello World, MainActivity!&lt;/string&gt;</div><div class="line"></div><div class="line">    &lt;string name=&quot;app_name&quot;&gt;TestExample01&lt;/string&gt;</div><div class="line"></div><div class="line">&lt;/resources&gt;</div></pre></td></tr></table></figure>
+<h3 id="在Activity中使用"><a href="#在Activity中使用" class="headerlink" title="在Activity中使用:"></a>在Activity中使用:</h3><blockquote>
+<p>String appName=(String) this.getResources().getText(R.string.app_name);</p>
+</blockquote>
+<p>或者：</p>
+<blockquote>
+<p>String appName=(String) this.getResources().getString(R.string.app_name);</p>
+</blockquote>
+<p>2.定义string数组(arrays.xml)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line"></div><div class="line">&lt;resources&gt;</div><div class="line"></div><div class="line">    &lt;string-array name=&quot;sports&quot;&gt;</div><div class="line"></div><div class="line">  &lt;item&gt;足球&lt;/item&gt;</div><div class="line"></div><div class="line">  &lt;item&gt;篮球&lt;/item&gt;</div><div class="line"></div><div class="line">  &lt;item&gt;太极&lt;/item&gt;</div><div class="line"></div><div class="line">  &lt;item&gt;冰球&lt;/item&gt;</div><div class="line"></div><div class="line">    &lt;/string-array&gt;</div><div class="line"></div><div class="line">&lt;/resources&gt;</div></pre></td></tr></table></figure>
+<p>使用</p>
+<blockquote>
+<p>—-getResources().getStringArray(R.string.sports);</p>
+</blockquote>
+<p>3.定义颜色(colors.xml)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line"></div><div class="line">&lt;resources&gt;</div><div class="line"></div><div class="line">    &lt;color name=&quot;black&quot;&gt;#FFFFFF&lt;/color&gt;</div><div class="line"></div><div class="line">&lt;/resources&gt;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>—getResources().getDrawable(R.string.black);<br>—getResources().getColor(R.string.black);</p>
+</blockquote>
+<p>4.定义尺寸(dimens.xml)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line"></div><div class="line">&lt;resources&gt;</div><div class="line"></div><div class="line">   &lt;dimen name=&quot;height&quot;&gt;80dip&lt;/dimen&gt;</div><div class="line"></div><div class="line">&lt;/resources&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>—getResource().getDimension(R.string.height);</p>
+</blockquote>
+<p>5.定义样式(styles.xml)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line"></div><div class="line">&lt;resources&gt;</div><div class="line"></div><div class="line">    &lt;style name=&quot;sharpText&quot;&gt;</div><div class="line"></div><div class="line">  &lt;item name=&quot;android:textSize&quot;&gt;18sp&lt;/item&gt;</div><div class="line"></div><div class="line">  &lt;item name=&quot;android:textColor&quot;&gt;#000000&lt;/item&gt;</div><div class="line"></div><div class="line">    &lt;/style&gt;</div><div class="line"></div><div class="line">&lt;/resources&gt;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;获取string-xml文件里面的值有几个不同的地方&quot;&gt;&lt;a href=&quot;#获取string-xml文件里面的值有几个不同的地方&quot; class=&quot;headerlink&quot; title=&quot;获取string.xml文件里面的值有几个不同的地方&quot;&gt;&lt;/a&gt;获取string.xml文件里面的值有几个不同的地方&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;在AndroidManifest.xml与layout等xml文件里:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;   android:text=”@string/resource_name”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;在activity里：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;方法一:this.getString(R.string.resource_name);&lt;br&gt;方法二:getResources().getString(R.string.resource_name);&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;在其他java文件（必须有Context或pplication）&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;方法一: context.getString(R.string.resource_name);&lt;br&gt;方法二: application.getString(R.string.resource_name);  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://flcker.cn/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="http://flcker.cn/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OpenGl(一)</title>
+    <link href="http://flcker.cn/2016/01/10/opengl-1/"/>
+    <id>http://flcker.cn/2016/01/10/opengl-1/</id>
+    <published>2016-01-10T07:31:05.000Z</published>
+    <updated>2016-01-21T07:48:34.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="OpenGl-语法"><a href="#OpenGl-语法" class="headerlink" title="OpenGl 语法"></a>OpenGl 语法</h2><h3 id="OpenGL函数名"><a href="#OpenGL函数名" class="headerlink" title="OpenGL函数名"></a>OpenGL函数名</h3><p>OpenGL库中所有的函数都会以字符“gl”作为前缀，然后是一个或者多个大写字母开头的词组，以此来命名一个完整的函数（如：glClear），OpenGL都是这种函数格式。<br>OpenGL 的函数的命名方式可以告诉你你所使用的函数来自哪个库，及这个函数有几个参数和参数的类型。所有的函数都有一个词根来描述函数在OpenGL中相应的命令。例如：glColor3f() 有一个词根color。gl- 前缀描述的是这个函数来自gl库；-3f后缀表示函数有三个实型参数。所有的OpenGL函数是如下格式：<br><a id="more"></a></p>
+<blockquote>
+<p>&lt;库前缀&gt;&lt;根命令&gt;&lt;参数的数目&gt;&lt;参数的类型&gt;。</p>
+</blockquote>
+<p>OpenGl Utility Toolkit是第三方的库，其中的函数以”glut”开头，这是一个流行的跨平台工具库，可以用于显示窗口、管理用户输入以及执行其他一些操作。</p>
+<p>与函数名约定的类似，OpenGl库中定义的常量也是GL_COLOR_BUFFER<em>BIT的形式，所有的常量都是以GL</em>作为前缀，并且使用下划线分隔单词。常量用#define 来完成，一般在<code>glcorearb.h</code>和<code>glext.h</code>中。</p>
+<p>OpenGL是一个C语言形式的库，它的函数不可以重载来处理不同类型的数据，用函数名的细微变化来管理实现同一类功能的函数集。</p>
+<h3 id="OpenGL数据类型及对应的C数据类型"><a href="#OpenGL数据类型及对应的C数据类型" class="headerlink" title="OpenGL数据类型及对应的C数据类型"></a>OpenGL数据类型及对应的C数据类型</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">OpenGL数据类型</th>
+<th style="text-align:center">数据类型</th>
+<th style="text-align:center">相应的C数据类型</th>
+<th style="text-align:center">后缀</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">GLbyte</td>
+<td style="text-align:center">8-bit integer</td>
+<td style="text-align:center">signed char</td>
+<td style="text-align:center">b</td>
+</tr>
+<tr>
+<td style="text-align:center">GLshort</td>
+<td style="text-align:center">16-bit integer</td>
+<td style="text-align:center">short</td>
+<td style="text-align:center">s</td>
+</tr>
+<tr>
+<td style="text-align:center">G l int,GLsizei</td>
+<td style="text-align:center">32-bit integer</td>
+<td style="text-align:center">long</td>
+<td style="text-align:center">l</td>
+</tr>
+<tr>
+<td style="text-align:center">GLfloat,GLclampf</td>
+<td style="text-align:center">32-bit floating point</td>
+<td style="text-align:center">float</td>
+<td style="text-align:center">f</td>
+</tr>
+<tr>
+<td style="text-align:center">GLdouble,GLclampd</td>
+<td style="text-align:center">64-bit floating point</td>
+<td style="text-align:center">double</td>
+<td style="text-align:center">d</td>
+</tr>
+<tr>
+<td style="text-align:center">GLubyte,GLboolean</td>
+<td style="text-align:center">8-bit unsigned integer</td>
+<td style="text-align:center">unsigned char</td>
+<td style="text-align:center">ub</td>
+</tr>
+<tr>
+<td style="text-align:center">GLushort</td>
+<td style="text-align:center">16-bit unsigned integer</td>
+<td style="text-align:center">unsigned short</td>
+<td style="text-align:center">us</td>
+</tr>
+<tr>
+<td style="text-align:center">GLuint, GLenum, GLbitfield</td>
+<td style="text-align:center">32-bit unsigned integer</td>
+<td style="text-align:center">unsigned int</td>
+<td style="text-align:center">ui</td>
+</tr>
+</tbody>
+</table>
+<p>所有的数据类型都以GL开头，表示是OpenGL。紧跟在后面的大多是它们相应的C数据类型。一些开始有个u表示是无符号的数据类型，如：ubyte表示是无符号的字节。也给出了更多的描述名字的方法，如：size表示一个值的长度。GLsizei表示是一个GL变量，且参数的大小是一个整型。 C lamp是用于颜色的。这种数据类型以f和d结尾表示实型或双精度型数据类型。GLboolean变量用于标示True和False；GLenum用于枚举型变量； GLbitfield 用于包含二进制位的区域的变量。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;OpenGl-语法&quot;&gt;&lt;a href=&quot;#OpenGl-语法&quot; class=&quot;headerlink&quot; title=&quot;OpenGl 语法&quot;&gt;&lt;/a&gt;OpenGl 语法&lt;/h2&gt;&lt;h3 id=&quot;OpenGL函数名&quot;&gt;&lt;a href=&quot;#OpenGL函数名&quot; class=&quot;headerlink&quot; title=&quot;OpenGL函数名&quot;&gt;&lt;/a&gt;OpenGL函数名&lt;/h3&gt;&lt;p&gt;OpenGL库中所有的函数都会以字符“gl”作为前缀，然后是一个或者多个大写字母开头的词组，以此来命名一个完整的函数（如：glClear），OpenGL都是这种函数格式。&lt;br&gt;OpenGL 的函数的命名方式可以告诉你你所使用的函数来自哪个库，及这个函数有几个参数和参数的类型。所有的函数都有一个词根来描述函数在OpenGL中相应的命令。例如：glColor3f() 有一个词根color。gl- 前缀描述的是这个函数来自gl库；-3f后缀表示函数有三个实型参数。所有的OpenGL函数是如下格式：&lt;br&gt;
+    
+    </summary>
+    
+      <category term="OpenGl" scheme="http://flcker.cn/categories/OpenGl/"/>
+    
+    
+      <category term="技术" scheme="http://flcker.cn/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="OpenGl" scheme="http://flcker.cn/tags/OpenGl/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>我用我的固执回应你的漠视</title>
+    <link href="http://flcker.cn/2016/01/05/%E6%9C%AA%E5%90%8D/"/>
+    <id>http://flcker.cn/2016/01/05/未名/</id>
+    <published>2016-01-05T15:16:37.000Z</published>
+    <updated>2016-01-21T07:48:34.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="我用我的固执回应你的漠视"><a href="#我用我的固执回应你的漠视" class="headerlink" title="我用我的固执回应你的漠视"></a>我用我的固执回应你的漠视</h1><iframe style="align=right" frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="200" src="http://music.163.com/outchain/player?type=0&id=148931519&auto=0&height=110"></iframe>
+
+<p>公司离租的房子有差不多25公里，每天早晚需要一个半小时的地铁，但是我不曾感觉累。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;我用我的固执回应你的漠视&quot;&gt;&lt;a href=&quot;#我用我的固执回应你的漠视&quot; class=&quot;headerlink&quot; title=&quot;我用我的固执回应你的漠视&quot;&gt;&lt;/a&gt;我用我的固执回应你的漠视&lt;/h1&gt;&lt;iframe style=&quot;align=right&quot; frame
+    
+    </summary>
+    
+      <category term="随想录" scheme="http://flcker.cn/categories/%E9%9A%8F%E6%83%B3%E5%BD%95/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>外链测试</title>
+    <link href="http://flcker.cn/2015/12/31/%E5%A4%96%E9%93%BE%E6%B5%8B%E8%AF%95/"/>
+    <id>http://flcker.cn/2015/12/31/外链测试/</id>
+    <published>2015-12-31T08:19:46.000Z</published>
+    <updated>2016-01-21T07:48:34.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>豆瓣电台</p>
+<a id="more"></a>
+<iframe name="iframe_canvas" src="http://douban.fm/partner/baidu/doubanradio" scrolling="no" frameborder="0" width="420" height="190"></iframe>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;iframe id=&quot;runtime&quot; name=&quot;runtime&quot; width=&quot;500&quot; height=&quot;250&quot; scrolling=&quot;no&quot; frameborder=&quot;0&quot; src=&quot;http://douban.fm/radio&quot;&gt;&lt;/iframe&gt;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;豆瓣电台&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="default" scheme="http://flcker.cn/categories/default/"/>
+    
+    
+      <category term="测试" scheme="http://flcker.cn/tags/%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>满江红</title>
+    <link href="http://flcker.cn/2015/12/31/%E6%BB%A1%E6%B1%9F%E7%BA%A2/"/>
+    <id>http://flcker.cn/2015/12/31/满江红/</id>
+    <published>2015-12-31T07:50:18.000Z</published>
+    <updated>2016-01-26T07:45:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="满江红-（岳飞）"><a href="#满江红-（岳飞）" class="headerlink" title="满江红 （岳飞）"></a>满江红 （岳飞）</h1><p>怒发冲冠，凭栏处，潇潇雨歇。抬望眼，仰天长啸，壮怀激烈。</p>
+<a id="more"></a>
+<p>三十功名尘与土，八千里路云和月。莫等闲，白了少年头，空悲切！</p>
+<p>靖康耻，犹未雪；臣子恨，何时灭?驾长车，踏破贺兰山缺！</p>
+<p>壮志饥餐胡虏肉，笑谈渴饮匈奴血。待从头，收拾旧山河，朝天阙！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=330 height=86 src=&quot;http://music.163.com/outchain/player?type=2&amp;id=26383237&amp;auto=1&amp;height=66&quot;&gt;&lt;/iframe&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;object type=&quot;application/x-shockwave-flash&quot; id=&quot;ximalaya_player&quot; data=&quot;http://www.ximalaya.com/swf/album/red.swf?id=274086&quot; width=&quot;260&quot; height=&quot;230&quot;&gt;&lt;/object&gt;</div></pre></td></tr></table></figure>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="http://www.ximalaya.com/swf/album/red.swf?id=274086"></iframe>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;iframe height=&quot;230&quot; width=&quot;260&quot; src=&quot;http://www.ximalaya.com/swf/album/red.swf?id=274086&quot; frameborder=0 allowfullscreen&gt;&lt;/iframe&gt;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;满江红-（岳飞）&quot;&gt;&lt;a href=&quot;#满江红-（岳飞）&quot; class=&quot;headerlink&quot; title=&quot;满江红 （岳飞）&quot;&gt;&lt;/a&gt;满江红 （岳飞）&lt;/h1&gt;&lt;p&gt;怒发冲冠，凭栏处，潇潇雨歇。抬望眼，仰天长啸，壮怀激烈。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="诗词" scheme="http://flcker.cn/categories/%E8%AF%97%E8%AF%8D/"/>
+    
+    
+      <category term="岳飞" scheme="http://flcker.cn/tags/%E5%B2%B3%E9%A3%9E/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>咏梅</title>
+    <link href="http://flcker.cn/2015/12/31/%E5%92%8F%E6%A2%85/"/>
+    <id>http://flcker.cn/2015/12/31/咏梅/</id>
+    <published>2015-12-31T03:34:37.000Z</published>
+    <updated>2016-01-21T07:48:34.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="咏梅-（陆游）"><a href="#咏梅-（陆游）" class="headerlink" title="咏梅    （陆游）"></a>咏梅    （陆游）</h1><p>驿外断桥边，<br>寂寞开无主。</p>
+<a id="more"></a>
+<p>已是黄昏独自愁，<br>更著(zhuó)风和雨。<br>无意苦争春，<br>一任群芳妒。<br>零落成泥碾作尘，<br>只有香如故。</p>
+<hr>
+<h1 id="咏梅-（毛泽东）"><a href="#咏梅-（毛泽东）" class="headerlink" title="咏梅    （毛泽东）"></a>咏梅    （毛泽东）</h1><p>风雨送春归，<br>飞雪迎春到。<br>已是悬崖百丈冰，<br>犹有花枝俏。<br>俏也不争春，<br>只把春来报。<br>待到山花烂漫时，<br>她在丛中笑。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;咏梅-（陆游）&quot;&gt;&lt;a href=&quot;#咏梅-（陆游）&quot; class=&quot;headerlink&quot; title=&quot;咏梅    （陆游）&quot;&gt;&lt;/a&gt;咏梅    （陆游）&lt;/h1&gt;&lt;p&gt;驿外断桥边，&lt;br&gt;寂寞开无主。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="诗词" scheme="http://flcker.cn/categories/%E8%AF%97%E8%AF%8D/"/>
+    
+    
+      <category term="咏梅" scheme="http://flcker.cn/tags/%E5%92%8F%E6%A2%85/"/>
+    
+  </entry>
+  
+</feed>
