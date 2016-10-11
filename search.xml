@@ -824,8 +824,8 @@ I420 ： 亮度（行×列） ＋ U（行×列/4) + V（行×列/4）
   
     
     <entry>
-      <title><![CDATA[categories]]></title>
-      <url>http://flcker.cn/categories/index.html</url>
+      <title><![CDATA[about]]></title>
+      <url>http://flcker.cn/about/index.html</url>
       <content type="html"></content>
     </entry>
     
@@ -836,14 +836,14 @@ I420 ： 亮度（行×列） ＋ U（行×列/4) + V（行×列/4）
     </entry>
     
     <entry>
-      <title><![CDATA[travels]]></title>
-      <url>http://flcker.cn/travels/index.html</url>
+      <title><![CDATA[categories]]></title>
+      <url>http://flcker.cn/categories/index.html</url>
       <content type="html"></content>
     </entry>
     
     <entry>
-      <title><![CDATA[about]]></title>
-      <url>http://flcker.cn/about/index.html</url>
+      <title><![CDATA[travels]]></title>
+      <url>http://flcker.cn/travels/index.html</url>
       <content type="html"></content>
     </entry>
     
